@@ -2,10 +2,13 @@
 CC = g++
 
 # C++ 컴파일러 옵션
-CXXFLAGS = -g
+CXXFLAGS = -g -std=c++14
 
 # 링커 옵션
 LDFLAGS = 
+
+#
+LIBS = -lurcu
 
 # 소스 파일 디렉토리
 SRC_DIR = Srcs
@@ -14,19 +17,31 @@ SRC_DIR = Srcs
 OBJ_DIR = Objs
 
 # Include 파일 디렉토리
-INCLUDE =	-I $(SRC_DIR)										\
+###INCLUDE =	-I $(SRC_DIR)/Common/Communication/Ethernet/TCP		\
+			-I $(SRC_DIR)/Common/Communication/Ethernet			\
+			-I $(SRC_DIR)/Common/Communication					\
+			-I $(SRC_DIR)/Common/Thread							\
 			-I $(SRC_DIR)/Source								\
-			-I $(SRC_DIR)/Common/Communication				\
-		   	-I $(SRC_DIR)/Common/Communication/Ethernet		\
-			-I $(SRC_DIR)/Common/Communication/Ethernet/TCP
+			-I $(SRC_DIR)										
 
+INCLUDE = -I $(SRC_DIR)		
+										
 # 생성하고자 하는 실행 파일 이름
 TARGET = main
 
 #
-SRCS += $(wildcard $(SRC_DIR)/Common/Communication/Ethernet/TCP/*.cpp)
-SRCS += $(wildcard $(SRC_DIR)/Source/*.cpp)
-SRCS  = $(wildcard $(SRC_DIR)/*.cpp)
+#SRCS  = $(wildcard $(SRC_DIR)/Common/Communication/Ethernet/TCP/*.cpp)
+SRCS  = $(wildcard $(SRC_DIR)/Common/Thread/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/*.cpp)
+#SRCS += $(wildcard $(SRC_DIR)/Source/*.cpp)
+
+
+
+
+
+$(info "")
+$(info $(SRCS))
+$(info "")
 
 #
 OBJS = ${SRCS:.cpp=.o}
@@ -38,10 +53,10 @@ OBJECTS = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRCS))
 all: main
 $(OBJ_DIR)/%.o : $(SRCS)
 	mkdir -p $(shell dirname $@) 
-	$(CC) $(CXXFLAGS) $(INCLUDE) -c $< -o $@ -MD $(LDFLAGS)  
+	$(CC) $(CXXFLAGS) $(INCLUDE) -c $< -o $@ -MD $(LDFLAGS) 
 
 $(TARGET) : $(OBJECTS)
-	$(CC) $(CXXFLAGS) $(OBJECTS) -o $(TARGET) $(LDFLAGS)
+	$(CC) $(CXXFLAGS) $(OBJECTS) -o  $(TARGET) $(LDFLAGS) 
 
 .PHONY: clean all
 clean:

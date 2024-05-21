@@ -5,13 +5,11 @@ int CommonProjectBuildDate[4]	__attribute__((section("BUildDate"))) = {2024,5,15
 #endif
 
 #include <CommonHeader.h>
-#include <Common/Communication/Ethernet/TCP/CTCPClient.h>
-#include <Common/Communication/Ethernet/TCP/CTCPServer.h>
+
+#include <Common/Thread/Thread.h>
 
 int main(void)
 {
-
-	std::cout << "hello world\n";
-
+	Thread tThread("MyTask");
 	return 0;
 }

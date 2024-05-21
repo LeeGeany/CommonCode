@@ -71,7 +71,8 @@ CTCPClient::~CTCPClient() noexcept
     void CTCPClient::Close()
     {
 
-        int ret = close(m_sockfd);
+        int ret = 0;
+        //int ret = close(m_sockfd);
 
         if(0 > ret)
         {

@@ -9,6 +9,9 @@
 /* Standard IO */
 #include <iostream>
 
+/* C++ Header */
+#include <memory>
+
 /* C Header */
 #include <cstring>
 
