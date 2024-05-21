@@ -2,10 +2,7 @@
 #ifndef __COMMON_HEADER__
 #define __COMMON_HEADER__
 
-
-#define __linux
 #define __ethernet
-
 
 #ifdef __cplusplus
 
@@ -22,7 +19,8 @@
 #endif /* __cplusplus */
 
 
-#ifdef __linux
+#ifndef __linux__
+#define __linux__
 
 /* POSIX */
 #include <unistd.h>

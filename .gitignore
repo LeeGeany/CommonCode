@@ -25,8 +25,17 @@
 *.la
 *.a
 *.lib
+*.d
+*.o
 
 # Executables
 *.exe
 *.out
 *.app
+*.elf
+
+# Utils
+*.txt
+
+# object file
+Objs/

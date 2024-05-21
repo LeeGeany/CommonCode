@@ -17,7 +17,7 @@ namespace comm {
 namespace eth {
 namespace tcp {
 
-    class CTCPServer : public comm::IServer, public comm::IReceive, public comm::ISend
+    class CTCPServer : public comm::eth::IServer, public comm::IReceive, public comm::ISend
     {
     public:
         CTCPServer(const short LocalPort);
@@ -30,8 +30,8 @@ namespace tcp {
         virtual void Accept() override;
         virtual void Close() override;
     
-        virtual void Send(const char* Buffer, int BufferSize) override;
-        virtual void Receive(char * Buffer, int BufferSize) override;
+        virtual int Send(const char* Buffer, int BufferSize) override;
+        virtual int Receive(char * Buffer, int BufferSize) override;
 
     public:
         void Initiate();
