@@ -38,8 +38,8 @@ namespace tcp {
     void CTCPServer::Accept() {}
     void CTCPServer::Close() {}
 
-    void CTCPServer::Send(const char* Buffer, int BufferSize) {}
-    void CTCPServer::Receive(char * Buffer, int BufferSize){}
+    int CTCPServer::Send(const char* Buffer, int BufferSize) {}
+    int CTCPServer::Receive(char * Buffer, int BufferSize){}
 
 
     void CTCPServer::Initiate() {}

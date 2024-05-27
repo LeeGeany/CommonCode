@@ -12,7 +12,7 @@ namespace comm {
 class ISend 
 {
 public:
-    virtual ~ISend();
+    virtual ~ISend(){};
 
 public:
     virtual int Send(const char* Buffer, int BufferSize)=0;

@@ -12,7 +12,7 @@ namespace comm {
 class IReceive 
 {
 public:
-    virtual ~IReceive();
+    virtual ~IReceive(){};
 
 public:
     virtual int Receive(char * Buffer, int BufferSize)=0;
