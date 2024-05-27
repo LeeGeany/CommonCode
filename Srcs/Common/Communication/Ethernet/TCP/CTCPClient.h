@@ -4,8 +4,8 @@
  *@brief    TCP Client Class Header
  */
 
-#ifndef _COMMUNICATION_ETHERNET_TCP_CTCPCLIENT_H_
-#define _COMMUNICATION_ETHERNET_TCP_CTCPCLIENT_H_
+#ifndef __COMMON_COMMUNICATION_ETHERNET_TCP_CTCPCLIENT_H__
+#define __COMMON_COMMUNICATION_ETHERNET_TCP_CTCPCLIENT_H__
 
 #include <CommonHeader.h>
 
@@ -19,11 +19,6 @@ namespace tcp {
 
 class CTCPClient : public comm::eth::IClient, public comm::IReceive, public comm::ISend
 {
-private:
-    int m_sockfd;
-    sockaddr_in m_sClientAddr;
-    bool m_isConnect;
-
 public:
     /**
      * @brief CTCPClient Constructor
@@ -39,21 +34,24 @@ public:
 
 public:
 
-    virtual void Socket() override;
-    virtual void Connect() override;
-    virtual void Close() override;
+    virtual int Socket() final;
+    virtual int Connect() final;
+    virtual int Close() final;
 
     virtual int Send(const char* Buffer, int BufferSize) override;
     virtual int Receive(char * Buffer, int BufferSize) override;
 
 public:
     void Initiate();
-    bool IsConnect();
-
+    void Terminate();
+    void ClientInfoShow();
+    
+private:
+    int m_sockfd;
+    sockaddr_in m_sClientAddr;
 };
 
 } /* namespace tcp */
 } /* namespace eth */
 } /* namespace comm */
-
-#endif /* _COMMUNICATION_ETHERNET_TCP_CTCPCLIENT_H_ */
+#endif /* __COMMON_COMMUNICATION_ETHERNET_TCP_CTCPCLIENT_H__ */

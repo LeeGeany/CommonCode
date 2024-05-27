@@ -30,8 +30,7 @@ SRCS += $(wildcard $(SRC_DIR)/*.cpp)
 OBJS = ${SRCS:.cpp=.o}
 DEPS = $(OBJS:.o=.d)
 
-OBJECTS = $(patsubst %.o, $(OBJ_DIR)/%.o, $(SRCS))
-
+OBJECTS = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRCS))
 
 all: main
 $(OBJ_DIR)/%.o : $(SRCS)
@@ -39,10 +38,10 @@ $(OBJ_DIR)/%.o : $(SRCS)
 	$(CC) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
 
 $(TARGET) : $(OBJECTS)
-	$(CC) $(CXXFLAGS) $(INCLUDE) $(OBJECTS) -o  $(TARGET) $(LDFLAGS) 
+	$(CC) $(CXXFLAGS) $(INCLUDE) $(SRCS) -o  $(TARGET) $(LDFLAGS) 
 
 .PHONY: clean all
 clean:
-	rm -f $(OBJECTS) $(DEPS) $(TARGET)
+	rm -f $(OBJECTS) $(TARGET)
 
 -include $(DEPS)

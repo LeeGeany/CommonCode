@@ -16,9 +16,9 @@ namespace eth {
         virtual ~IClient() { }
 
     public:
-        virtual void Socket()=0;
-        virtual void Connect()=0;
-        virtual void Close()=0;
+        virtual int Socket()=0;
+        virtual int Connect()=0;
+        virtual int Close()=0;
     };
 
 } /* namespace eth */

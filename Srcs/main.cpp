@@ -6,10 +6,17 @@ int CommonProjectBuildDate[4]	__attribute__((section("BUildDate"))) = {2024,5,15
 
 #include <CommonHeader.h>
 
-#include <Common/Thread/Thread.h>
+#include <Common/Communication/Ethernet/TCP/CTCPClient.h>
 
 int main(void)
 {
-	Thread tThread("MyTask");
-	return 0;
+	std::unique_ptr<comm::eth::tcp::CTCPClient> uptr_Client;
+	uptr_Client = std::make_unique<comm::eth::tcp::CTCPClient>("192.168.0.7", 12345);
+
+	uptr_Client->Initiate();
+
+	while(1)
+	{
+		
+	}
 }

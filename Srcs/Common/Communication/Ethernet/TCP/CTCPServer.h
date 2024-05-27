@@ -4,8 +4,8 @@
  *@brief    TCP Server Class Header
  */
 
-#ifndef _COMMUNICATION_ETHERNET_TCP_CTCPSERVER_H_
-#define _COMMUNICATION_ETHERNET_TCP_CTCPSERVER_H_
+#ifndef __COMMON_COMMUNICATION_ETHERNET_TCP_CTCPSERVER_H__
+#define __COMMON_COMMUNICATION_ETHERNET_TCP_CTCPSERVER_H__
 
 #include <CommonHeader.h>
 
@@ -46,5 +46,4 @@ namespace tcp {
 } /* namespace tcp */
 } /* namespace eth */
 } /* namespace comm */
-
-#endif /* _COMMUNICATION_ETHERNET_TCP_CTCPSERVER_H_ */
+#endif /* __COMMON_COMMUNICATION_ETHERNET_TCP_CTCPSERVER_H__ */
