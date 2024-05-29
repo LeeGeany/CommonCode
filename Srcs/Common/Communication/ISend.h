@@ -4,8 +4,8 @@
  *@brief    Send Interface Class 
  */
 
-#ifndef __COMMUNICATION_ISEND__
-#define __COMMUNICATION_ISEND__
+#ifndef __COMMUNICATION_ISEND_H__
+#define __COMMUNICATION_ISEND_H__
 
 namespace comm {
 
@@ -15,9 +15,9 @@ public:
     virtual ~ISend(){};
 
 public:
-    virtual int Send(const char* Buffer, int BufferSize)=0;
+    virtual int Send(const char* Buffer, const unsigned int BufferSize)=0;
 };
 
 } /* namespace comm */
 
-#endif /* __COMMUNICATION_ISEND__ */
+#endif /* __COMMUNICATION_ISEND_H__ */

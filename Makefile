@@ -22,9 +22,10 @@ INCLUDE = -I $(SRC_DIR)
 # 생성하고자 하는 실행 파일 이름
 TARGET = main
 
-
 SRCS  = $(wildcard $(SRC_DIR)/Common/Communication/Ethernet/TCP/*.cpp)
 SRCS += $(wildcard $(SRC_DIR)/Common/Thread/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/Source/Interface/Manager/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/Source/Interface/Node/*.cpp)
 SRCS += $(wildcard $(SRC_DIR)/*.cpp)
 
 OBJS = ${SRCS:.cpp=.o}

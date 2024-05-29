@@ -38,8 +38,8 @@ public:
     virtual int Connect() final;
     virtual int Close() final;
 
-    virtual int Send(const char* Buffer, int BufferSize) override;
-    virtual int Receive(char * Buffer, int BufferSize) override;
+    virtual int Send(const char* Buffer, const unsigned int BufferSize) override;
+    virtual int Receive(char * Buffer, const unsigned int BufferSize) override;
 
 public:
     void Initiate();

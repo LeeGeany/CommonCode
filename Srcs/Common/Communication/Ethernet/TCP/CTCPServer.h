@@ -24,23 +24,24 @@ namespace tcp {
         virtual ~CTCPServer();
 
     public:
-        virtual void Socket() override;
-        virtual void Bind() override;
-        virtual void Listen() override;
-        virtual void Accept() override;
-        virtual void Close() override;
+        virtual int Socket()    final;
+        virtual int Bind()      final;
+        virtual int Listen()    final;
+        virtual int Accept()    final;
+        virtual void Close()     final;
     
-        virtual int Send(const char* Buffer, int BufferSize) override;
-        virtual int Receive(char * Buffer, int BufferSize) override;
+        virtual int Send(const char* Buffer, const unsigned int BufferSize) override;
+        virtual int Receive(char * Buffer, const unsigned int BufferSize) override;
 
     public:
         void Initiate();
         bool IsConnect();
 
     private:
-        int m_sockfd;
-        sockaddr_in m_sServerAddr;
-        bool m_isConnect;
+        int             m_sockfd;
+        int             m_Connectfd;
+        sockaddr_in     m_sServerAddr;
+        socklen_t       m_addrlen;
     };
 
 } /* namespace tcp */

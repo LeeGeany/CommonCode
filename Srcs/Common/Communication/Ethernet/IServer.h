@@ -16,10 +16,10 @@ namespace eth {
         virtual ~IServer() { } 
 
     public:
-        virtual void Socket()=0;
-        virtual void Bind()=0;
-        virtual void Listen()=0;
-        virtual void Accept()=0;
+        virtual int Socket()=0;
+        virtual int Bind()=0;
+        virtual int Listen()=0;
+        virtual int Accept()=0;
         virtual void Close()=0;
     };
 

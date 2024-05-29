@@ -71,7 +71,7 @@ int CTCPClient::Close()
  * @param BufferSize
  * @return int Send Buffer Size
  */
-int CTCPClient::Send(const char* Buffer, int BufferSize)
+int CTCPClient::Send(const char* Buffer, const unsigned int BufferSize)
 {
     return send(m_sockfd, Buffer, BufferSize, 0);
 }
@@ -82,7 +82,7 @@ int CTCPClient::Send(const char* Buffer, int BufferSize)
  * @param BufferSize
  * @return int Receive Buffer Size
  */
-int CTCPClient::Receive(char * Buffer, int BufferSize)
+int CTCPClient::Receive(char * Buffer, const unsigned int BufferSize)
 {
     return recv(m_sockfd, Buffer, BufferSize, 0);
 }

@@ -15,7 +15,7 @@ public:
     virtual ~IReceive(){};
 
 public:
-    virtual int Receive(char * Buffer, int BufferSize)=0;
+    virtual int Receive(char * Buffer, const unsigned int BufferSize)=0;
 };
 
 } /* namespace comm */
