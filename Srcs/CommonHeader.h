@@ -8,6 +8,8 @@
 /* C++ Header */
 #include <memory>
 #include <thread>
+#include <atomic>
+#include <mutex>
 
 /* C Header */
 #include <cstring>
