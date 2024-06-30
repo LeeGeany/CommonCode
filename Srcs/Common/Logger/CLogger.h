@@ -3,15 +3,15 @@
 
 #include <CommonHeader.h>
 
-class CLogger
-{
-private:
-    CLogger(const CLogger& other);
+// class CLogger
+// {
+// private:
+//     CLogger(const CLogger& other);
+//     static CLogger& GetInstance();
 
-    static CLogger& GetInstance();
-private:
-    static std::atomic<CLogger*> m_instance;
-    static std::mutex m_mtx;
-};
+// private:
+//     static std::atomic<CLogger*> m_instance;
+//     static std::mutex m_mtx;
+// };
 
 #endif /* __COMMON_LOGGER__CLOGGER_H__ */

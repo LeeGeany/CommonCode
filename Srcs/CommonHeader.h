@@ -14,6 +14,11 @@
 /* C Header */
 #include <cstring>
 
+/* Inter Process Communication */
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+
 /* Exception */
 #include <stdexcept>
 
@@ -26,6 +31,9 @@
 
 /* POSIX */
 #include <unistd.h>     
+
+/* State */
+#include <sys/stat.h>
 
 /* __ethernet */
 #include <sys/socket.h>
