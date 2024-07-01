@@ -37,7 +37,7 @@ public:
     int SendMsg(int DestUsrDefID, const DATA * Buffer, const unsigned int BufferSize)
     {
         int SendMsgQID = GetOtherMsgQID(DestUsrDefID);
-        return msgsnd(SendMsgQID, Buffer, sizeof(DATA));
+        return msgsnd(SendMsgQID, Buffer, sizeof(DATA), IPC_NOWAIT);
     }
 
     /**
