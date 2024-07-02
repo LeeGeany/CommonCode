@@ -5,7 +5,7 @@ int CommonProjectBuildDate[4]	__attribute__((section("BUildDate"))) = {2024,5,15
 #endif
 
 #include <CommonHeader.h>
-#include <UnitTest/Test_MsgQueue.h>
+#include <UnitTest/Test_MsgQueue/Test_MsgQueue.h>
 
 int main(void)
 {

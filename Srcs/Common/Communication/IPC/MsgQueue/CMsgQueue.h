@@ -1,21 +1,42 @@
+/**
+ * @file    CMsgQueue.h
+ * @author  jinhee.lee
+ * @date    2024.07.24
+ * @brief   Class of Message Queue Header
+ * 
+ * @copyright jinhee.lee
+ */
+
 #ifndef __COMMON_COMMUNICATION_IPC_MSGQUEUE_CMSGQUEUE_H__
 #define __COMMON_COMMUNICATION_IPC_MSGQUEUE_CMSGQUEUE_H__
 
 #include <CommonHeader.h>
 
-#include <Common/Communication/ISend.h>
-#include <Common/Communication/IReceive.h>
-
 namespace comm {
 namespace ipc {
 namespace msgQ {
 
+/**
+ * @struct SMsgQData
+ * @brief Structure of Linux IPC Message Queue
+ */
+template <typename DATA>
+struct SMsgQData
+{
+    long msgType;
+    DATA data;
+};
+
+/**
+ * @class CMsgQueue
+ * @brief Class of Linux IPC Message Queue
+ */
 class CMsgQueue
 {
 public:
     /**
      * @brief CMsgQueue Constructor 
-     * @param UsrDefID User Define ID (Example : Enum, Define etc...)
+     * @param UsrDefID User Define Message Queue ID (Example : Enum, Define etc...)
      */
     explicit CMsgQueue(int UsrDefID) noexcept;
 
@@ -28,52 +49,74 @@ public:
 public:
     /**
      * @brief Send Message
-     * @param DestID
-     * @param Buffer
-     * @param BufferSize
+     * @param DestUsrDefID Destination Message Queue Instance User Define ID
+     * @param MsgType Message Type
+     * @param Buffer Send Data Buffer
      * @return int Sucess or Fail
      */
     template <typename DATA>
-    int SendMsg(int DestUsrDefID, const DATA * Buffer, const unsigned int BufferSize)
+    int SendMsg(int DestUsrDefID, int MsgType, const DATA * Buffer)
     {
-        int SendMsgQID = GetOtherMsgQID(DestUsrDefID);
-        return msgsnd(SendMsgQID, Buffer, sizeof(DATA), IPC_NOWAIT);
+        // Step.1 Make Message
+        SMsgQData<DATA> tMsg;
+        tMsg.msgType = MsgType;
+        tMsg.data = *Buffer;
+
+        // Step.2 Find Destination
+        int SendMsgQID = GetOtherMsgQID(DestUsrDefID); 
+
+        // Step.3 Send Message
+        int ret = msgsnd(SendMsgQID, &tMsg, sizeof(SMsgQData<DATA>), IPC_NOWAIT);
+
+        // Step.4 Return Result
+        return ret;
     }
 
     /**
      * @brief Receive Message
-     * @param
-     * @param
-     * @param
-     * @return int Sucess or Fail
+     * @param Buffer Receive Data Buffer
+     * @param msgType Message Type
+     * @return Sucess or Fail
      */
     template <typename DATA>
     int RecvMsg(DATA * Buffer, unsigned int msgType=0)
     {
-        return msgrcv(m_MsgID, Buffer, sizeof(DATA), msgType, IPC_NOWAIT);
+        // Make Message
+        SMsgQData<DATA> tMsg;
+
+        // Receive Message
+        int ret =  msgrcv(m_MsgID, &tMsg, sizeof(DATA), msgType, IPC_NOWAIT);
+    
+        // Copy Data
+        *Buffer = tMsg.data;
+
+        // Return Result
+        return ret;
     }
 
     /**
      * @brief Insert Other Process Msg Queue ID
-     * @param destKey Destination Process
-     * @param MsgQID
+     * @param UserDefID Other Message Queue Instance User Define ID
+     * @param MsgQID Other Message Queue Instance ID (Create By msgget(...) Function)
      */
     void InsertKey(int UserDefID, int MsgID);
 
     /**
-     * @brief
+     * @brief Get This Instance Message Queue ID (Create By msgget(...) Function)
+     * @return This Instance Message Queue ID
      */
     int GetMyMsgQID();
 
     /**
-     * @brief
+     * @brief Get Other Instance Message Queue ID (Insert By InsertKey(...) Function)
+     * @return Other Instance Message Queue ID or Error -1
      */
     int GetOtherMsgQID(unsigned int DestUsrDefID);
 
 
 private:
     /**
-     * @brief 
+     * @brief Message Queue ID (Create By msgget(...) Function)
      */
     int m_MsgID;
 

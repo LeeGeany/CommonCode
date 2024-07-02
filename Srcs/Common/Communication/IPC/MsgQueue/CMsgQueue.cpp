@@ -1,3 +1,12 @@
+/**
+ * @file    CMsgQueue.cpp
+ * @author  jinhee.lee
+ * @date    2024.07.24
+ * @brief   Class of Message Queue Header
+ * 
+ * @copyright jinhee.lee
+ */
+
 #include "CMsgQueue.h"
 
 namespace comm {
@@ -16,7 +25,15 @@ CMsgQueue::~CMsgQueue() noexcept
 
 void CMsgQueue::InsertKey(int UserDefID, int MsgID)
 {
-    m_umID.insert({UserDefID, MsgID});
+    try
+    {
+        m_umID.insert({UserDefID, MsgID});
+    }
+    catch(const std::exception& e)
+    {
+        //< Make Log
+        std::cout << e.what() << '\n';
+    }
 }
 
 int CMsgQueue::GetMyMsgQID()
@@ -26,7 +43,19 @@ int CMsgQueue::GetMyMsgQID()
 
 int CMsgQueue::GetOtherMsgQID(unsigned int DestUsrDefID)
 {
-    return m_umID.find(DestUsrDefID)->second;
+    int ret = 0;
+    auto item = m_umID.find(DestUsrDefID);
+
+    if(item != m_umID.end())
+    {
+        ret = item->second;
+    }
+    else
+    {
+        ret = -1;
+    }
+
+    return ret;
 }
 
 } /* namespace msgQ */
