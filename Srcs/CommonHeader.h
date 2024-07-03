@@ -40,4 +40,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
+/* Time */
+#include <chrono>
+
 #endif /* __COMMON_HEADER_H__ */

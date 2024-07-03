@@ -11,5 +11,5 @@ int main(void)
 {
     CUnitTest_MsgQueue MsgQExample;
 
-    MsgQExample.UnitTest();
+    MsgQExample.Run();
 }

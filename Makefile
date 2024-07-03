@@ -24,12 +24,18 @@ TARGET = main
 
 SRCS  = $(wildcard $(SRC_DIR)/Common/Communication/Ethernet/TCP/*.cpp)
 SRCS  = $(wildcard $(SRC_DIR)/Common/Communication/IPC/MsgQueue/*.cpp)
+
 SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/Process/*.cpp)
 SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/Thread/*.cpp)
+
 SRCS += $(wildcard $(SRC_DIR)/Common/Logger/*.cpp)
+
 SRCS += $(wildcard $(SRC_DIR)/Source/Interface/Manager/*.cpp)
 SRCS += $(wildcard $(SRC_DIR)/Source/Interface/Node/*.cpp)
+
+SRCS += $(wildcard $(SRC_DIR)/UnitTest/*.cpp)
 SRCS += $(wildcard $(SRC_DIR)/UnitTest/Test_MsgQueue/*.cpp)
+
 SRCS += $(wildcard $(SRC_DIR)/*.cpp)
 
 OBJS = ${SRCS:.cpp=.o}

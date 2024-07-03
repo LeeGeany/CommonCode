@@ -1,7 +1,7 @@
 /**
  * @file    CMsgQueue.cpp
  * @author  jinhee.lee
- * @date    2024.07.24
+ * @date    2024.07.02
  * @brief   Class of Message Queue Header
  * 
  * @copyright jinhee.lee

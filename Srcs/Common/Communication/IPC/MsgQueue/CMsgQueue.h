@@ -1,7 +1,7 @@
 /**
  * @file    CMsgQueue.h
  * @author  jinhee.lee
- * @date    2024.07.24
+ * @date    2024.07.02
  * @brief   Class of Message Queue Header
  * 
  * @copyright jinhee.lee
@@ -15,17 +15,6 @@
 namespace comm {
 namespace ipc {
 namespace msgQ {
-
-/**
- * @struct SMsgQData
- * @brief Structure of Linux IPC Message Queue
- */
-template <typename DATA>
-struct SMsgQData
-{
-    long msgType;
-    DATA data;
-};
 
 /**
  * @class CMsgQueue
@@ -66,7 +55,7 @@ public:
         int SendMsgQID = GetOtherMsgQID(DestUsrDefID); 
 
         // Step.3 Send Message
-        int ret = msgsnd(SendMsgQID, &tMsg, sizeof(SMsgQData<DATA>), IPC_NOWAIT);
+        int ret = msgsnd(SendMsgQID, &tMsg, sizeof(DATA), IPC_NOWAIT);
 
         // Step.4 Return Result
         return ret;
@@ -89,6 +78,9 @@ public:
     
         // Copy Data
         *Buffer = tMsg.data;
+
+        // Flush Queue
+        ret = msgctl(m_MsgID, IPC_RMID, NULL);
 
         // Return Result
         return ret;
@@ -124,6 +116,17 @@ private:
      * @brief key=UsrDefineID , value=MsgID 
      */
     std::unordered_map<int, int> m_umID;
+
+    /**
+     * @struct SMsgQData
+     * @brief Structure of Linux IPC Message Queue
+     */
+    template <typename DATA>
+    struct SMsgQData
+    {
+        long msgType;
+        DATA data;
+    };
 };
 
 } /* namespace msgQ */

@@ -1,7 +1,7 @@
 /**
- * @file    CMsgQueue.h
+ * @file    Test_MsgQueue.h
  * @author  jinhee.lee
- * @date    2024.07.24
+ * @date    2024.07.02
  * @brief   Class of Message Queue Header
  * 
  * @copyright jinhee.lee
@@ -12,6 +12,7 @@
 
 #include <CommonHeader.h>
 
+#include <UnitTest/CUnitTest.h>
 #include <Common/Communication/IPC/MsgQueue/CMsgQueue.h>
 
 /**
@@ -39,25 +40,25 @@ typedef struct sData
  * @class CUnitTest_MsgQueue
  * @brief Class of Message Queue Unit Test
  */
-class CUnitTest_MsgQueue
+class CUnitTest_MsgQueue : public CUnitTest
 {
 public:
     /**
      * @brief CUnitTest_MsgQueue Constructor
      */
-    CUnitTest_MsgQueue() = default;
+    CUnitTest_MsgQueue();
 
     /**
      * @brief CUnitTest_MsgQueue Destructor
      */
-    virtual ~CUnitTest_MsgQueue() = default;
+    virtual ~CUnitTest_MsgQueue();
 
 
 public:
     /**
      * @brief Unit Test Function
      */
-    void UnitTest();
+        virtual void UnitTest() final;
 
 
 private:
