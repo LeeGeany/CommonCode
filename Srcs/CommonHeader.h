@@ -43,4 +43,6 @@
 /* Time */
 #include <chrono>
 
+/* Function */
+#include <functional>
 #endif /* __COMMON_HEADER_H__ */

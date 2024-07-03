@@ -54,7 +54,7 @@ public:
     virtual ~CUnitTest_MsgQueue();
 
 
-public:
+private:
     /**
      * @brief Unit Test Function
      */

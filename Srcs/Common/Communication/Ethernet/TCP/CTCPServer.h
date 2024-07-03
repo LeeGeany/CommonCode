@@ -9,26 +9,25 @@
 
 #include <CommonHeader.h>
 
-#include <Common/Communication/Ethernet/IServer.h>
-#include <Common/Communication/ISend.h>
-#include <Common/Communication/IReceive.h>
+#include <Common/Communication/Ethernet/ISend.h>
+#include <Common/Communication/Ethernet/IReceive.h>
 
 namespace comm {
 namespace eth {
 namespace tcp {
 
-    class CTCPServer : public comm::eth::IServer, public comm::IReceive, public comm::ISend
+    class CTCPServer : public IReceive, public ISend
     {
     public:
         CTCPServer(const short LocalPort);
         virtual ~CTCPServer();
 
     public:
-        virtual int Socket()    final;
-        virtual int Bind()      final;
-        virtual int Listen()    final;
-        virtual int Accept()    final;
-        virtual void Close()     final;
+        int Socket();
+        int Bind();
+        int Listen();
+        int Accept();
+        void Close();
     
         virtual int Send(const char* Buffer, const unsigned int BufferSize) override;
         virtual int Receive(char * Buffer, const unsigned int BufferSize) override;

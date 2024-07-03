@@ -1,18 +1,31 @@
-#include <Common/Concurrent/Thread/CThread.h>
+/**
+ * @file    CThread.cpp
+ * @author  jinhee.lee
+ * @date    2024.07.04
+ * @brief   Class of Thread Source
+ * 
+ * @copyright jinhee.lee
+ */
 
-CThread::CThread() noexcept
+#include "CThread.h"
+
+namespace concurrent {
+namespace thread {
+
+CThread::CThread(std::function<void()> Func) noexcept
+: m_Run(Func)
 {
     
 }
  
 CThread::~CThread() noexcept
 {
-    std::cout << "Thread Destructor\n";
+
 }
 
 void CThread::Start()
 {
-    m_thread = std::thread(&CThread::Run, this);
+    m_thread = std::thread(&CThread::Operate, this);
 }
 
 void CThread::Join()
@@ -30,9 +43,10 @@ void CThread::Detach()
     m_thread.detach();
 }
 
-void CThread::Run()
+void CThread::Operate()
 {
-    PreStart();
-    OnStart();
-    PostStart();
+    m_Run();
 }
+
+} /* thread */
+} /* concurrent */
