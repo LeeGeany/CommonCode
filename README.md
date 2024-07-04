@@ -15,9 +15,9 @@
 
 ### [2024/07/05] 
   #### Create Loop Thread
-    * Unit Test   : UnitTest/Test_Thread.*
-    * Explanation : 
+  * Unit Test   : UnitTest/Test_Thread.*
+  * Explanation : 
 
   #### Create TCP Socket
-    * Unit Test   : UnitTest/Test_TCP.*
-    * Explanation : 
+  * Unit Test   : UnitTest/Test_TCP.*
+  * Explanation : 
