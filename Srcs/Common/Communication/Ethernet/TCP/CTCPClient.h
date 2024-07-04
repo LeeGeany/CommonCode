@@ -35,7 +35,7 @@ public:
     virtual ~CTCPClient() noexcept;
 
 
-public:
+private:
     /**
      * @brief Create Socket (PF_INET - IPv4, SOCK_STREAM, 0)
      */
@@ -51,6 +51,8 @@ public:
      */
     virtual int Close() final;
 
+
+public:
     /**
      * @brief Send Data
      * @param Buffer
@@ -67,8 +69,6 @@ public:
      */
     virtual int Receive(char * Buffer, const unsigned int BufferSize) override;
 
-
-public:
     /**
      * @brief Initiate Client Instance
      */

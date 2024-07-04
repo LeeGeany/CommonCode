@@ -12,6 +12,14 @@
 
 #include <UnitTest/CUnitTest.h>
 
+#include "CommonHeader.h"
+
+#include <Common/Communication/Ethernet/TCP/CTCPServer.h>
+#include <Common/Communication/Ethernet/TCP/CTCPClient.h>
+
+void MainServer();
+void MainClient();
+
 class CUnitTest_TCP : public CUnitTest
 {
 public:
@@ -25,20 +33,12 @@ public:
      */
     virtual ~CUnitTest_TCP();
 
-private:
+
+public:
     /**
      * @brief Unit Test Function
      */
         virtual void UnitTest() final;
-
-private:
-    /**
-     * @brief 
-     */
-    void mainClient();
-
-
-private:
 
 };
 #endif /* __UNITTEST_TEST_TCP_H__ */

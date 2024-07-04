@@ -16,32 +16,91 @@ namespace comm {
 namespace eth {
 namespace tcp {
 
-    class CTCPServer : public IReceive, public ISend
-    {
-    public:
-        CTCPServer(const short LocalPort);
-        virtual ~CTCPServer();
+class CTCPServer : public IReceive, public ISend
+{
+public:
+    /**
+     * @brief Construct a new CTCPServer object
+     * @param LocalPort 
+     */
+    CTCPServer(const short LocalPort);
 
-    public:
-        int Socket();
-        int Bind();
-        int Listen();
-        int Accept();
-        void Close();
-    
-        virtual int Send(const char* Buffer, const unsigned int BufferSize) override;
-        virtual int Receive(char * Buffer, const unsigned int BufferSize) override;
+    /**
+     * @brief Destroy the CTCPServer object
+     */
+    virtual ~CTCPServer();
 
-    public:
-        void Initiate();
-        bool IsConnect();
+private:
+    /**
+     * @brief 
+     * @return int 
+     */
+    int Socket();
 
-    private:
-        int             m_sockfd;
-        int             m_Connectfd;
-        sockaddr_in     m_sServerAddr;
-        socklen_t       m_addrlen;
-    };
+    /**
+     * @brief 
+     * @return int 
+     */
+    int Bind();
+
+    /**
+     * @brief 
+     * @return int 
+     */
+    int Listen();
+
+    /**
+     * @brief 
+     * @return int 
+     */
+    int Accept();
+
+    /**
+     * @brief 
+     */
+    void Close();
+
+
+public:
+    /**
+     * @brief 
+     * @param Buffer 
+     * @param BufferSize 
+     * @return int 
+     */
+    virtual int Send(const char* Buffer, const unsigned int BufferSize) override;
+
+    /**
+     * @brief 
+     * @param Buffer 
+     * @param BufferSize 
+     * @return int 
+     */
+    virtual int Receive(char * Buffer, const unsigned int BufferSize) override;
+
+    /**
+     * @brief 
+     */
+    void Initiate();
+
+    /**
+     * @brief
+     */
+    void Terminate();
+
+    /**
+     * @brief 
+     * @return true 
+     * @return false 
+     */
+    bool IsConnect();
+
+private:
+    int             m_sockfd;
+    int             m_Connectfd;
+    sockaddr_in     m_sServerAddr;
+    socklen_t       m_addrlen;
+};
 
 } /* namespace tcp */
 } /* namespace eth */

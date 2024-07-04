@@ -7,7 +7,7 @@
  * @copyright jinhee.lee
  */
 
-#include <Common/Communication/Ethernet/TCP/CTCPClient.h>
+#include "CTCPClient.h"
 
 namespace comm {
 namespace eth {

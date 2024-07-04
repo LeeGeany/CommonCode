@@ -21,21 +21,21 @@ CTest_Thread::~CTest_Thread()
 
 void CTest_Thread::UnitTest()
 {
-    // Thread1 = std::make_unique<concurrent::thread::CThread>(Thread1Main);
-    // Thread2 = std::make_unique<concurrent::thread::CThread>(Thread2Main);
 
-    // Thread1->Start();
-    // Thread2->Start();
+    Thread1 = std::make_unique<concurrent::thread::CThread>(Thread1Main);
+    Thread2 = std::make_unique<concurrent::thread::CThread>(Thread2Main);
 
-    // Thread1->Join();
-    // Thread2->Join();
+    Thread1->Start();
+    Thread2->Start();
+
+    Thread1->Join();
+    Thread2->Join();
 
     ThreadLoop1 = std::make_unique<concurrent::thread::CThreadLoop>(ThreadLoop1Main);
     ThreadLoop2 = std::make_unique<concurrent::thread::CThreadLoop>(ThreadLoop2Main);
 
     ThreadLoop1->Start();
     ThreadLoop2->Start();
-
 
     sleep(5);
 

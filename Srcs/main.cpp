@@ -7,11 +7,15 @@ int CommonProjectBuildDate[4]	__attribute__((section("BUildDate"))) = {2024,5,15
 #include <CommonHeader.h>
 #include <UnitTest/Test_Thread/Test_Thread.h>
 
+#include <UnitTest/Test_TCP/Test_TCP.h>
+
 int main(void)
 {
-    CTest_Thread ThreadExample;
+    CUnitTest_TCP Tcp;
 
-    ThreadExample.Run();
+    Tcp.UnitTest();
+
+    while(1){}
 
     return 0;
 }

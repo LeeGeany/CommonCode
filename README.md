@@ -9,4 +9,8 @@
 
 ### [2024/07/04] Create Thread
   * Unit Test   : UnitTest/Test_Thread.*
-  * Explanation  : 
+  * Explanation : 
+
+### [2024/07/05] Create Loop Thread
+  * Unit Test   : UnitTest/Test_Thread.*
+  * Explanation : 

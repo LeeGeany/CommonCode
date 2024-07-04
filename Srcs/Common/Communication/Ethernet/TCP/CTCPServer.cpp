@@ -116,6 +116,11 @@ void CTCPServer::Initiate()
     Accept();
 }
 
+void CTCPServer::Terminate()
+{
+    Close();
+}
+
 bool CTCPServer::IsConnect() 
 {
     return true;
