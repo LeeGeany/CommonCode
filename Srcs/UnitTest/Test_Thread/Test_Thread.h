@@ -14,6 +14,7 @@
 
 #include "CommonHeader.h"
 #include <Common/Concurrent/Thread/CThread.h>
+#include <Common/Concurrent/Thread/CThreadLoop.h>
 
 /**
  * @brief 
@@ -24,6 +25,16 @@ void Thread1Main();
  * @brief 
  */
 void Thread2Main();
+
+/**
+ * @brief 
+ */
+void ThreadLoop1Main();
+
+/**
+ * @brief 
+ */
+void ThreadLoop2Main();
 
 class CTest_Thread : public CUnitTest
 {
@@ -56,6 +67,16 @@ private:
      * @brief 
      */
     std::unique_ptr<concurrent::thread::CThread> Thread2;
+
+        /**
+     * @brief 
+     */
+    std::unique_ptr<concurrent::thread::CThreadLoop> ThreadLoop1;
+    
+    /**
+     * @brief 
+     */
+    std::unique_ptr<concurrent::thread::CThreadLoop> ThreadLoop2;
 };
 
 #endif /* __UNITTEST_TEST_THREAD_H__ */

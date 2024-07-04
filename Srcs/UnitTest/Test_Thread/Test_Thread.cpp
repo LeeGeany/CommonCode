@@ -21,25 +21,48 @@ CTest_Thread::~CTest_Thread()
 
 void CTest_Thread::UnitTest()
 {
-    std::function<void()> f1 = Thread1Main;
-    auto f2 = Thread2Main;
+    // Thread1 = std::make_unique<concurrent::thread::CThread>(Thread1Main);
+    // Thread2 = std::make_unique<concurrent::thread::CThread>(Thread2Main);
 
-    Thread1 = std::make_unique<concurrent::thread::CThread>(f1);
-    Thread2 = std::make_unique<concurrent::thread::CThread>(f2);
+    // Thread1->Start();
+    // Thread2->Start();
 
-    Thread1->Start();
-    Thread2->Start();
+    // Thread1->Join();
+    // Thread2->Join();
 
-    Thread1->Join();
-    Thread2->Join();
+    ThreadLoop1 = std::make_unique<concurrent::thread::CThreadLoop>(ThreadLoop1Main);
+    ThreadLoop2 = std::make_unique<concurrent::thread::CThreadLoop>(ThreadLoop2Main);
+
+    ThreadLoop1->Start();
+    ThreadLoop2->Start();
+
+
+    sleep(5);
+
+    ThreadLoop1->Stop();
+    ThreadLoop2->Stop();
 }
 
 void Thread1Main()
 {
-    std::cout << "This is Thread1\n";
+    for(int i = 0; i < 3; ++i)
+        std::cout << "This is Thread1\n";
 }
 
 void Thread2Main()
 {
-    std::cout << "This is Thread2\n";
+    for(int i = 0; i < 3; ++i)
+        std::cout << "This is Thread2\n";
+}
+
+void ThreadLoop1Main()
+{
+    std::cout << "This is Loop Thread1\n";
+    sleep(1);
+}
+
+void ThreadLoop2Main()
+{
+    std::cout << "This is Loop Thread2\n";
+    sleep(1);
 }
