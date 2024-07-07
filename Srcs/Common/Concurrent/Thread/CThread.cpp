@@ -15,7 +15,7 @@ namespace thread {
 CThread::CThread(std::function<void()> Func) noexcept
 : m_Run(Func)
 {
-    
+
 }
  
 CThread::~CThread() noexcept

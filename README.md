@@ -21,3 +21,7 @@
   #### Create TCP Socket
   * Unit Test   : UnitTest/Test_TCP.*
   * Explanation : 
+
+### [2024/7/7]
+  #### Fix TCP Unit Teste Code
+  * Fix Connection Fail Error Between Server and Client.

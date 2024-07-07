@@ -27,7 +27,6 @@ CTCPServer::~CTCPServer()
 
 }
 
-
 int CTCPServer::Socket()
 {
     int Ret = 0;
@@ -45,7 +44,7 @@ int CTCPServer::Socket()
 int CTCPServer::Bind()
 {
     int Ret = 0;
-    Ret = bind(m_sockfd, reinterpret_cast<sockaddr*>(&m_sServerAddr), m_addrlen);
+    Ret = bind(m_sockfd, (sockaddr*)(&m_sServerAddr), m_addrlen);
 
     if(Ret < 0)
     {
@@ -63,12 +62,8 @@ int CTCPServer::Listen()
 
     if(Ret < 0)
     {
-        std::perror("Listen Fail...");
+        std::perror("Listen Fail...\n");
         Ret = -1;
-    }
-    else
-    {
-        std::printf("Listen Success");
     }
 
     return Ret;
@@ -76,17 +71,12 @@ int CTCPServer::Listen()
 
 int CTCPServer::Accept()
 {
-    int Ret = 0;
-    m_Connectfd = accept(m_sockfd, reinterpret_cast<sockaddr*>(&m_sServerAddr), &m_addrlen);
-    
+    int Ret = m_Connectfd;
+    m_Connectfd = accept(m_sockfd, (struct sockaddr*)(&m_sServerAddr), &m_addrlen);
     if(m_Connectfd < 0)
     {
-        std::perror("Accept Fail...");
+        std::perror("Accept Fail...\n");
         Ret = -1;
-    }
-    else
-    {
-        std::printf("Accept Success...");
     }
 
     return Ret;
@@ -100,12 +90,12 @@ void CTCPServer::Close()
 
 int CTCPServer::Send(const char* Buffer, const unsigned int BufferSize)
 {
-    return send(m_sockfd, Buffer, BufferSize, 0);
+    return send(m_Connectfd, Buffer, BufferSize, 0);
 }
 
 int CTCPServer::Receive(char * Buffer, const unsigned int BufferSize)
 {
-    return recv(m_sockfd, Buffer, BufferSize, 0);
+    return recv(m_Connectfd, Buffer, BufferSize, 0);
 }
 
 void CTCPServer::Initiate()

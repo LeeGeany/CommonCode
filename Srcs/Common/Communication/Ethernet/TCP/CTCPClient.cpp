@@ -19,7 +19,7 @@ CTCPClient::CTCPClient(const char * DestIP, const short DestPort) noexcept
     std::memset(&(m_sClientAddr), 0, sizeof(sockaddr_in));
     m_sClientAddr.sin_family        = static_cast<sa_family_t>(AF_INET);
     m_sClientAddr.sin_addr.s_addr   = inet_addr(DestIP);
-    m_sClientAddr.sin_port          = static_cast<in_port_t>(DestPort);
+    m_sClientAddr.sin_port          = static_cast<in_port_t>(htons(DestPort));
 }
 
 CTCPClient::~CTCPClient() noexcept
@@ -68,7 +68,6 @@ int CTCPClient::Receive(char * Buffer, const unsigned int BufferSize)
 {
     return recv(m_sockfd, Buffer, BufferSize, 0);
 }
-
 
 void CTCPClient::Initiate()
 {

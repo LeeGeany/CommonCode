@@ -24,44 +24,42 @@ CUnitTest_TCP::~CUnitTest_TCP()
 void CUnitTest_TCP::UnitTest()
 {
     concurrent::thread::CThread Server(MainServer);
-    sleep(1);
     concurrent::thread::CThread Client(MainClient);
 
-
+    Server.Start();
+    Client.Start();  
 
     Client.Join();
     Server.Join();
 
-
+    
 }
 
 void MainServer()
 {
-    std::cout << "server\n";
-    std::unique_ptr<comm::eth::tcp::CTCPServer> m_uptrServer = std::make_unique<comm::eth::tcp::CTCPServer>(8080);
+    std::unique_ptr<comm::eth::tcp::CTCPServer> m_uptrServer = std::make_unique<comm::eth::tcp::CTCPServer>(11111);
+    char RecvBuffer[128] = {0, };
+    
     m_uptrServer->Initiate();
     
-
-    char RecvBuffer[128] = {0, };
-
     while(1)
     {
+        std::memset(RecvBuffer, 0, sizeof(RecvBuffer));
         m_uptrServer->Receive(RecvBuffer, sizeof(RecvBuffer));
         std::cout << "Server Receive Data : " << RecvBuffer << std::endl;
     }
 
-    // m_uptrServer->Terminate();
+    m_uptrServer->Terminate();
 }
 
 void MainClient()
 {
-    std::cout << "client\n";
-    std::unique_ptr<comm::eth::tcp::CTCPClient>  m_uptrClient = std::make_unique<comm::eth::tcp::CTCPClient>("192.168.0.34", 8080);
+    std::unique_ptr<comm::eth::tcp::CTCPClient>  m_uptrClient = std::make_unique<comm::eth::tcp::CTCPClient>("192.168.0.34", 11111);
     m_uptrClient->Initiate();
 
     char SendBuffer[128] = {0, };
 
-    std::memcpy(SendBuffer, "Client Send TCP Message\n", sizeof(SendBuffer));
+    std::memcpy(SendBuffer, "Client Send TCP Message", sizeof(SendBuffer));
 
     while(1)
     {    
@@ -69,5 +67,5 @@ void MainClient()
         sleep(1);
     }
 
-    // m_uptrClient->Terminate();
+    m_uptrClient->Terminate();
 }
