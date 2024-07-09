@@ -5,27 +5,34 @@
 /* Standard IO */
 #include <iostream>
 
+/* C Header */
+#include <cstring>
+
 /* C++ Header */
 #include <memory>
 #include <thread>
 #include <atomic>
 #include <mutex>
+#include <string>
 
-/* C Header */
-#include <cstring>
+/* Signal */
+#include <signal.h>
 
 /* Inter Process Communication */
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
 
+/* Ethernet */
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
 /* Exception */
 #include <stdexcept>
 
-/* Standard Template Library */
+/* Standard Template Library & Container */
 #include <string>
-
-/* Container */
 #include <vector>
 #include <unordered_map>
 
@@ -35,14 +42,10 @@
 /* State */
 #include <sys/stat.h>
 
-/* __ethernet */
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-
 /* Time */
 #include <chrono>
 
 /* Function */
 #include <functional>
+
 #endif /* __COMMON_HEADER_H__ */

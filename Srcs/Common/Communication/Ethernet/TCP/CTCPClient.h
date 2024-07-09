@@ -1,7 +1,7 @@
 /**
  * @file    CTCPClient.h
  * @author  jinhee.lee
- * @date    2024.07.04
+ * @date    2024.07.05
  * @brief   Class of TCP Client Header
  * 
  * @copyright jinhee.lee

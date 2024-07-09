@@ -15,7 +15,6 @@ int main(void)
 
     Tcp.UnitTest();
 
-    while(1){}
 
     return 0;
 }

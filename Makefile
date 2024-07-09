@@ -24,6 +24,8 @@ TARGET = main
 
 SRCS  = $(wildcard $(SRC_DIR)/Common/Communication/Ethernet/TCP/*.cpp)
 
+SRCS += $(wildcard $(SRC_DIR)/Common/Communication/Signal/*.cpp)
+
 SRCS += $(wildcard $(SRC_DIR)/Common/Communication/IPC/MsgQueue/*.cpp)
 
 SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/Process/*.cpp)
