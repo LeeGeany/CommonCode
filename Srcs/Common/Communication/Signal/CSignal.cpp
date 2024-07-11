@@ -14,7 +14,7 @@ namespace sig {
 
 CSignal::CSignal()
 {
-    
+
 }
 
 CSignal::~CSignal()
@@ -22,17 +22,67 @@ CSignal::~CSignal()
 
 }
 
-void CSignal::UsrSignal(int SigType, std::function<void(int)> Handler)
+void CSignal::Initiate()
 {
-    void(*const * pFunc)(int)  = Handler.target<void(*)(int)>();
-    signal(SigType, *pFunc);
+    sigemptyset(&m_Set);
 }
 
-int CSignal::SignalBlock(int Signal)
+void CSignal::Insert(int SigType, void(*Handler)(int))
+{
+    int Ret = 0;
+    Ret = sigaddset(&m_Set, SigType);
+    
+    if(Ret == 0)
+    {
+        signal(SigType, Handler);
+    }
+    else
+    {
+
+    }
+    
+    sigprocmask(SIG_SETMASK, &m_Set, NULL);
+}
+
+void CSignal::Delete(int SigType)
+{
+    int Ret = 0;
+    Ret = sigdelset(&m_Set, SigType);
+
+    sigprocmask(SIG_SETMASK, &m_Set, NULL);
+}
+
+int CSignal::Block(int SigType)
+{
+    int Ret = 0;
+    sigset_t tSet;
+
+    Ret = sigaddset(&tSet, SigType);
+    sigprocmask(SIG_BLOCK, &tSet, NULL);
+
+    return Ret;
+}
+
+int CSignal::BlockAll()
+{
+    sigprocmask(SIG_BLOCK, &m_Set, NULL);
+}
+
+int CSignal::Release(int SigType)
+{
+    int Ret = 0;
+    sigset_t tSet;
+    
+    Ret = sigaddset(&tSet, SigType);
+    sigprocmask(SIG_BLOCK, &tSet, NULL);
+
+    return Ret;
+}
+
+int CSignal::ReleaseAll()
 {
 
 }
-
 
 } /* namespace sig */
 } /* namespace comm */
