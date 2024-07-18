@@ -5,16 +5,13 @@ int CommonProjectBuildDate[4]	__attribute__((section("BUildDate"))) = {2024,5,15
 #endif
 
 #include <CommonHeader.h>
-#include <UnitTest/Test_Thread/Test_Thread.h>
-
-#include <UnitTest/Test_TCP/Test_TCP.h>
+#include <UnitTest/Test_Signal/Test_Signal.h>
 
 int main(void)
 {
-    CUnitTest_TCP Tcp;
+    CTest_Signal Sig;
 
-    Tcp.UnitTest();
-
+    Sig.UnitTest();
 
     return 0;
 }

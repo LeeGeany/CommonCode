@@ -31,31 +31,6 @@ private:
 
 public:
     /**
-     * @brief Get the Signal Mgr object
-     * @return CSignal& 
-     */
-    static CSignal & GetSignalMgr()
-    {
-        if(m_Instance.get() == nullptr)
-        {
-            std::lock_guard<std::mutex> lock(m_Mutex);
-            if(m_Instance.get() == nullptr)
-            {
-                m_Instance = std::make_unique<CSignal>();
-            }
-        }
-
-        return *(m_Instance.get());
-    }
-
-
-public:
-    /**
-     * @brief Initiate Signal
-     */
-    void Initiate();
-
-    /**
      * @brief 
      * @param Signal
      * @param
@@ -99,7 +74,7 @@ private:
     /**
      * @brief 
      */
-    static std::unique_ptr<CSignal> m_Instance;
+    static CSignal * m_pInstance;
 
     /**
      * @brief
@@ -111,9 +86,26 @@ private:
      */
     sigset_t m_Set;
 
+public:
+    /**
+     * @brief Get the Signal Mgr object
+     * @return CSignal& 
+     */
+    static CSignal * GetSignalMgr()
+    {
+        if(m_pInstance == nullptr)
+        {
+            std::lock_guard<std::mutex> lock(m_Mutex);
+            if(m_pInstance == nullptr)
+            {
+                m_pInstance = new CSignal();
+            }
+        }
+
+        return m_pInstance;
+    }
 };
 
 } /* namespace sig */
 } /* namespace comm */
-
 #endif /* __COMMON_COMMUNICATION_SIGNAL_CSIGNAL_H__ */

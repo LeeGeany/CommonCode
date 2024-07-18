@@ -12,19 +12,17 @@
 namespace comm {
 namespace sig {
 
+CSignal * CSignal::m_pInstance = nullptr;
+std::mutex CSignal::m_Mutex;
+
 CSignal::CSignal()
 {
-
+    sigemptyset(&m_Set);
 }
 
 CSignal::~CSignal()
 {
 
-}
-
-void CSignal::Initiate()
-{
-    sigemptyset(&m_Set);
 }
 
 void CSignal::Insert(int SigType, void(*Handler)(int))
@@ -34,14 +32,11 @@ void CSignal::Insert(int SigType, void(*Handler)(int))
     
     if(Ret == 0)
     {
+        sigprocmask(SIG_SETMASK, &m_Set, NULL);
         signal(SigType, Handler);
     }
-    else
-    {
-
-    }
     
-    sigprocmask(SIG_SETMASK, &m_Set, NULL);
+    
 }
 
 void CSignal::Delete(int SigType)
@@ -65,7 +60,8 @@ int CSignal::Block(int SigType)
 
 int CSignal::BlockAll()
 {
-    sigprocmask(SIG_BLOCK, &m_Set, NULL);
+    int ret = sigprocmask(SIG_BLOCK, &m_Set, NULL);
+    return ret;
 }
 
 int CSignal::Release(int SigType)
@@ -81,7 +77,8 @@ int CSignal::Release(int SigType)
 
 int CSignal::ReleaseAll()
 {
-
+    int ret = sigprocmask(SIG_UNBLOCK, &m_Set, NULL);
+    return ret;
 }
 
 } /* namespace sig */
