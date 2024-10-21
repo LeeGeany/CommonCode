@@ -25,3 +25,11 @@
 ### [2024/7/7]
   #### Fix TCP Unit Teste Code
   * Fix Connection Fail Error Between Server and Client.
+
+### [2024/7/7]
+  #### Create Data Manager & Data Interface
+  * Create Data Manager. Using API_JHData.h to use Data Manager.
+  * Think about..
+    1. How to make APIs more comfortable to User.
+    2. How to recognize user to used this without explaination.
+    3. How to Hide my inner code from user. 
