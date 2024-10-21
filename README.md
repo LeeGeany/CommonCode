@@ -26,7 +26,7 @@
   #### Fix TCP Unit Teste Code
   * Fix Connection Fail Error Between Server and Client.
 
-### [2024/7/7]
+### [2024/10/22]
   #### Create Data Manager & Data Interface
   * Create Data Manager. Using API_JHData.h to use Data Manager.
   * Think about..
