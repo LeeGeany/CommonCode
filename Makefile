@@ -2,7 +2,7 @@
 CC = g++
 
 # C++ 컴파일러 옵션
-CXXFLAGS = -g -std=c++14
+CXXFLAGS = -g -std=c++17
 
 # 링커 옵션
 LDFLAGS = 
@@ -32,6 +32,8 @@ SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/Process/*.cpp)
 SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/Thread/*.cpp)
 
 SRCS += $(wildcard $(SRC_DIR)/Common/Logger/*.cpp)
+
+SRCS += $(wildcard $(SRC_DIR)/Common/Time/*.cpp)
 
 SRCS += $(wildcard $(SRC_DIR)/App/Manager/Data/*.cpp)
 

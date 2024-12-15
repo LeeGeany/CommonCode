@@ -44,6 +44,8 @@
 
 /* Time */
 #include <chrono>
+#include <time.h>
+#include <sys/time.h>
 
 /* Function */
 #include <functional>
