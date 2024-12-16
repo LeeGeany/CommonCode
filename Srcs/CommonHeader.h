@@ -4,6 +4,7 @@
 
 /* Standard IO */
 #include <iostream>
+#include <fstream>
 
 /* C Header */
 #include <cstring>

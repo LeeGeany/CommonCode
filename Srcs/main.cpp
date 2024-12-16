@@ -6,20 +6,19 @@ int CommonProjectBuildDate[4]	__attribute__((section("BUildDate"))) = {2024,5,15
 
 #include <CommonHeader.h>
 
-#include "Common/Time/CTime.h"
+#include "Common/FileSystem/File/CFile.h"
 
 
 int main(void)
 {
+    std::string buffer{};
 
-    char buffer[20] = {0,};
-    Time::CTime::getTimeStamp(buffer);
-    printf("%s\n", buffer);
+    file::CFile file_both("test.txt", file::io_stream_file);
+    file_both << "hello" << " " << "world" << "\n";
 
-    Time::CTime::setTimeStamp(2025,140,0,0,0);
-    Time::CTime::getTimeStamp(buffer);
-    printf("%s\n", buffer);
+    file::CFile file_read("test.txt", file::in_stream_file);
+    file_read >> buffer;
 
-
+    std::cout << buffer;
     return 0;
 }

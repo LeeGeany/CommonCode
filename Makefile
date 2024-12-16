@@ -7,7 +7,7 @@ CXXFLAGS = -g -std=c++17
 # 링커 옵션
 LDFLAGS = 
 
-#
+# Library
 LIBS = -lurcu
 
 # 소스 파일 디렉토리
@@ -30,6 +30,9 @@ SRCS += $(wildcard $(SRC_DIR)/Common/Communication/IPC/MsgQueue/*.cpp)
 
 SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/Process/*.cpp)
 SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/Thread/*.cpp)
+
+SRCS += $(wildcard $(SRC_DIR)/Common/FileSystem/File/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/Common/FileSystem/Directory/*.cpp)
 
 SRCS += $(wildcard $(SRC_DIR)/Common/Logger/*.cpp)
 
