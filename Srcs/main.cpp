@@ -5,20 +5,16 @@ int CommonProjectBuildDate[4]	__attribute__((section("BUildDate"))) = {2024,5,15
 #endif
 
 #include <CommonHeader.h>
-
-#include "Common/FileSystem/File/CFile.h"
-
+#include "UnitTest/Test_Thread/Test_Thread.h"
 
 int main(void)
 {
-    std::string buffer{};
+    unittest::CTest_Thread test_Thread;
 
-    file::CFile file_both("test.txt", file::io_stream_file);
-    file_both << "hello" << " " << "world" << "\n";
+    
+    test_Thread.Start();
 
-    file::CFile file_read("test.txt", file::in_stream_file);
-    file_read >> buffer;
+    test_Thread.Join();
 
-    std::cout << buffer;
     return 0;
 }

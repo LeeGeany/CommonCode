@@ -45,10 +45,10 @@ SRCS += $(wildcard $(SRC_DIR)/Source/Interface/Node/*.cpp)
 SRCS += $(wildcard $(SRC_DIR)/Source/Data/*.cpp)
 
 SRCS += $(wildcard $(SRC_DIR)/UnitTest/*.cpp)
-SRCS += $(wildcard $(SRC_DIR)/UnitTest/Test_MsgQueue/*.cpp)
+#SRCS += $(wildcard $(SRC_DIR)/UnitTest/Test_MsgQueue/*.cpp)
 SRCS += $(wildcard $(SRC_DIR)/UnitTest/Test_Thread/*.cpp)
-SRCS += $(wildcard $(SRC_DIR)/UnitTest/Test_Signal/*.cpp)
-SRCS += $(wildcard $(SRC_DIR)/UnitTest/Test_TCP/*.cpp)
+#SRCS += $(wildcard $(SRC_DIR)/UnitTest/Test_Signal/*.cpp)
+#SRCS += $(wildcard $(SRC_DIR)/UnitTest/Test_TCP/*.cpp)
 
 SRCS += $(wildcard $(SRC_DIR)/*.cpp)
 

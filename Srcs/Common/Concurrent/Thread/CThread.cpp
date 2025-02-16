@@ -12,41 +12,72 @@
 namespace concurrent {
 namespace thread {
 
-CThread::CThread(std::function<void()> Func) noexcept
-: m_Run(Func)
-{
+    CThread::CThread() noexcept
+    : m_isLoop(false)
+    {
 
-}
- 
-CThread::~CThread() noexcept
-{
+    }
+    
+    CThread::~CThread() noexcept
+    {
 
-}
+    }
 
-void CThread::Start()
-{
-    m_thread = std::thread(&CThread::Operate, this);
-}
+    void CThread::Start()
+    {
+        m_thread = std::thread(&CThread::Run, this);
+    }
 
-void CThread::Join()
-{
-    m_thread.join();
-}
+    void CThread::Join()
+    {
+        m_thread.join();
+    }
 
-bool CThread::Joinable()
-{
-    return m_thread.joinable();
-}
+    bool CThread::Joinable()
+    {
+        return m_thread.joinable();
+    }
 
-void CThread::Detach()
-{
-    m_thread.detach();
-}
+    void CThread::Detach()
+    {
+        m_thread.detach();
+    }
 
-void CThread::Operate()
-{
-    m_Run();
-}
+    void CThread::Run()
+    {
+        try
+        {
+            PreOperate();
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+        
+        
+        do
+        {
+            try
+            {
+                Operate();
+            }
+            catch(const std::exception& e)
+            {
+                std::cerr << e.what() << '\n';
+            }
+            
+        }
+        while(m_isLoop);
+
+        try
+        {
+            PostOperate();
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+    }
 
 } /* thread */
 } /* concurrent */

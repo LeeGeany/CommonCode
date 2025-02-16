@@ -14,69 +14,28 @@
 
 #include "CommonHeader.h"
 #include <Common/Concurrent/Thread/CThread.h>
-#include <Common/Concurrent/Thread/CThreadLoop.h>
 
-/**
- * @brief 
- */
-void Thread1Main();
-
-/**
- * @brief 
- */
-void Thread2Main();
-
-/**
- * @brief 
- */
-void ThreadLoop1Main();
-
-/**
- * @brief 
- */
-void ThreadLoop2Main();
-
-class CTest_Thread : public CUnitTest
+namespace unittest
 {
-public:
-    /**
-     * @brief Construct a new CTest_Thread object
-     */
-    CTest_Thread();
-
-    /**
-     * @brief Destroy the CTest_Thread object
-     */
-    virtual ~CTest_Thread();
-
-private:
-    /**
-     * @brief Unit Test Function
-     */
-    virtual void UnitTest() final;
-
-
-
-private:
-    /**
-     * @brief 
-     */
-    std::unique_ptr<concurrent::thread::CThread> Thread1;
-    
-    /**
-     * @brief 
-     */
-    std::unique_ptr<concurrent::thread::CThread> Thread2;
+    class CTest_Thread : public concurrent::thread::CThread
+    {
+    public:
+        /**
+         * @brief Construct a new CTest_Thread object
+         */
+        CTest_Thread();
 
         /**
-     * @brief 
-     */
-    std::unique_ptr<concurrent::thread::CThreadLoop> ThreadLoop1;
-    
-    /**
-     * @brief 
-     */
-    std::unique_ptr<concurrent::thread::CThreadLoop> ThreadLoop2;
-};
+         * @brief Destroy the CTest_Thread object
+         */
+        virtual ~CTest_Thread();
+
+    private:
+        virtual void PreOperate()   final;
+        virtual void Operate()      final;
+        virtual void PostOperate()  final;
+
+    };
+} /* unittest */
 
 #endif /* __UNITTEST_TEST_THREAD_H__ */

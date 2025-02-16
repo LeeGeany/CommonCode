@@ -17,62 +17,82 @@
 namespace concurrent {
 namespace thread {
 
-class CThread : public concurrent::IOperate
-{
-public:
-    /**
-     * @brief Construct a new CThread object
-     * @param Func
-     */
-    explicit CThread(std::function<void()> Func) noexcept;
+    // type empty class
+    struct thread_loop_t
+    {
+        explicit thread_loop_t() = default;
+    };
+
+    struct thread_once_t
+    {
+        explicit thread_once_t() = default;
+    };
+
+    struct thread_count_t
+    {
+        explicit thread_count_t() = default;
+    }
 
     /**
-     * @brief Destroy the CThread object
+     * @brief alive for time
      */
-    virtual ~CThread() noexcept;
+    struct thread_time_t
+    {
+        explicit thread_time_t = default;
+    }
+
+    class CThread : public concurrent::IOperate
+    {
+    public:
+        /**
+         * @brief Construct a new CThread object
+         */
+        explicit CThread() noexcept;
+
+        /**
+         * @brief Destroy the CThread object
+         */
+        virtual ~CThread() noexcept;
 
 
-public:
-    /**
-     * @brief 
-     */
-    void Start();
+    public:
+        /**
+         * @brief 
+         */
+        void Start();
 
-    /**
-     * @brief 
-     */
-    void Join();
+        /**
+         * @brief 
+         */
+        void Join();
 
-    /**
-     * @brief 
-     * @return
-     */
-    bool Joinable();
+        /**
+         * @brief   Checking this thread can Join
+         * @return  If thread can Join return true, However cannot to join return false
+         */
+        bool Joinable();
 
-    /**
-     * @brief 
-     */
-    void Detach();
-
-
-private:
-    /**
-     * @brief Running Function
-     */
-    virtual void Operate() final;
+        /**
+         * @brief 
+         */
+        void Detach();
 
 
-private:
-    /**
-     * @brief Thread Instance
-     */
-    std::thread m_thread;
+    private:
+        void Run();
 
-    /**
-     * @brief User Define Operate Function
-     */
-    std::function<void()> m_Run;
-};
+
+    private:
+        /**
+         * @brief Thread Instance
+         */
+        std::thread m_thread;
+
+        /**
+         * @brief   Loop State
+         */
+        bool m_isLoop;
+    };
 
 } /* thread */
 } /* concurrent */
