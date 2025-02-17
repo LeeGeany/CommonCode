@@ -38,7 +38,7 @@ namespace thread {
      */
     struct thread_time_t
     {
-        explicit thread_time_t = default;
+        explicit thread_time_t() = default;
     }
 
     class CThread : public concurrent::IOperate
