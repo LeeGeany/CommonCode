@@ -9,13 +9,44 @@
 
 #include "CDataManager.h"
 
-void CDataManager::InsertData(const unsigned int DataNo, IData * data)
+namespace mngr
 {
-    m_Map.insert({DataNo, data});
-}
+    static CDataManager::CDataManager * m_pDataIns = nullptr;
 
-IData* CDataManager::FindData(const unsigned int DataNo)
-{
-    return m_Map[DataNo];
+    CDataManager::CDataManager()
+    {
 
-}
+    }
+
+
+    CDataManager::~CDataManager()
+    {
+
+    }
+
+
+    void CDataManager::Initiate()
+    {
+        m_Map.clear();
+    }
+
+
+    void CDataManager::InsertData(const unsigned int _dataName, data::CData * _data)
+    {
+        m_Map.insert(std::make_pair<unsigned int, data::CData*>(_dataID, _data));
+    }
+
+
+    data::CData* CDataManager::FindData(const unsigned int _dataName)
+    {
+        data::CData* ret = nullptr;
+        auto item = m_Map.find(_dataName);
+        
+        if(item != m_Map.end())
+        {
+            ret = &(item->second);
+        }
+
+        return ret;
+    }
+} /* namespace mngr */

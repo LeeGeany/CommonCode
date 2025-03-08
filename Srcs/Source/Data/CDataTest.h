@@ -4,23 +4,25 @@
 #include "Source/Data/DataType.h"
 #include "App/Manager/Data/CData.h"
 
-class CDataTest : public CData<stTest>
+namespace usr
 {
-public:
-    CDataTest();
-    CDataTest(const stTest&& other);
-    CDataTest(const CDataTest&& other);
-    virtual ~CDataTest();
+    class CDataTest : public CData<stTest>
+    {
+    public:
+        CDataTest();
+        CDataTest(const stTest&& other);
+        CDataTest(const CDataTest&& other);
+        virtual ~CDataTest();
 
-public:
-    virtual stTest& getData() final;
+    public:
+        virtual stTest& getData() final;
 
-public:
-    void setTest1(unsigned int value);
-    void setTest2(unsigned int value);
+    public:
+        void setTest1(unsigned int value);
+        void setTest2(unsigned int value);
 
-    unsigned int getTest1();
-    unsigned int getTest2();
-};
-
+        unsigned int getTest1();
+        unsigned int getTest2();
+    };
+} /* namespace usr */
 #endif /* __SOURCE_DATA_CDATATEST_H__ */
