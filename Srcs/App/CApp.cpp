@@ -8,7 +8,7 @@ namespace app
     }
 
     CApp::CApp(mngr::CDataManager * _DataMngr)
-    : m_upDataMngr{_DataMngr}
+    : m_pDataMngr{_DataMngr}
     {
 
     }
@@ -18,9 +18,8 @@ namespace app
 
     }
 
-    void CApp::App_Initiate()
+    mngr::CDataManager& CApp::getDataMngr()
     {
-        m_upDataMngr->Initiate();
+        return *m_pDataMngr;
     }
-
 } /* namespace app */

@@ -9,9 +9,9 @@
 
 #include "CDataManager.h"
 
-namespace mngr
-{
-    CDataManager * CDataManager::m_pDataIns = nullptr;
+namespace app {
+namespace mngr {
+    //CDataManager * CDataManager::m_pDataIns = nullptr;
 
     CDataManager::CDataManager()
     {
@@ -50,3 +50,4 @@ namespace mngr
         return ret;
     }
 } /* namespace mngr */
+} /* namespace app */

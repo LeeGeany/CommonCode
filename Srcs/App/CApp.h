@@ -24,13 +24,18 @@ namespace app
         virtual ~CApp();
 
     public:
-        void App_Initiate();
+        virtual void App_Initiate()=0;
+
+
+    public:
+        mngr::CDataManager& getDataMngr();
+
 
     private:
         /**
          * @brief
          */
-        mngr::CDataManager* m_upDataMngr;
+        mngr::CDataManager* m_pDataMngr;
 
         /**
          * @brief

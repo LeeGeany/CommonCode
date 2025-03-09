@@ -50,7 +50,7 @@ SRCS += $(wildcard $(SRC_DIR)/Common/FileSystem/Directory/*.cpp)
 SRCS += $(wildcard $(SRC_DIR)/Common/Time/*.cpp)
 
 # Source
-
+SRCS += $(wildcard $(SRC_DIR)/Source/Data/*.cpp)
 
 
 
@@ -62,7 +62,6 @@ SRCS += $(wildcard $(SRC_DIR)/Common/Time/*.cpp)
 
 #SRCS += $(wildcard $(SRC_DIR)/Source/Interface/Manager/*.cpp)
 #SRCS += $(wildcard $(SRC_DIR)/Source/Interface/Node/*.cpp)
-#SRCS += $(wildcard $(SRC_DIR)/Source/Data/*.cpp)
 
 #SRCS += $(wildcard $(SRC_DIR)/UnitTest/*.cpp)
 #SRCS += $(wildcard $(SRC_DIR)/UnitTest/*.cpp)

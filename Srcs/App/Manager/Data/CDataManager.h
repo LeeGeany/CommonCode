@@ -14,11 +14,12 @@
 #include "Common/DataSystem/CData.h"
 #include "Common/DataSystem/IData.h"
 
+namespace app {
 namespace mngr
 {
     class CDataManager
     {
-    private:
+    public:
         CDataManager();
         virtual ~CDataManager();
 
@@ -26,11 +27,11 @@ namespace mngr
     public:
         static CDataManager* getInstance()
         {
-            if(nullptr == m_pDataIns)
-            {
-                m_pDataIns = new CDataManager();
-            }
-            return m_pDataIns;
+             if(nullptr == m_pDataIns)
+             {
+                 m_pDataIns = new CDataManager();
+             }
+             return m_pDataIns;
         }
 
 
@@ -40,7 +41,8 @@ namespace mngr
          */
         virtual void Initiate();
 
-    protected:
+
+    public:
         /**
          * @brief   Insert Data
          * @param   _dataName   Key of Data
@@ -87,4 +89,5 @@ namespace mngr
         std::unordered_map<unsigned int, data::IData*> m_Map;
     }; /* class CDataManager*/
 } /* namespace mngr */
+} /* namespace app */
 #endif /* __APP_MANAGER_DATA_CDATAMANAGER_H__ */

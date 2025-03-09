@@ -6,8 +6,10 @@ int CommonProjectBuildDate[4]	__attribute__((section("BUildDate"))) = {2024,5,15
 
 #include <CommonHeader.h>
 
+#include "App/CApp.h"
+#include "App/Manager/Data/CDataManager.h"
+
 int main(void)
 {
-    std::cout << "main\n";
     return 0;
 }
