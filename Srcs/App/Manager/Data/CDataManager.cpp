@@ -11,7 +11,7 @@
 
 namespace mngr
 {
-    static CDataManager::CDataManager * m_pDataIns = nullptr;
+    CDataManager * CDataManager::m_pDataIns = nullptr;
 
     CDataManager::CDataManager()
     {
@@ -31,20 +31,20 @@ namespace mngr
     }
 
 
-    void CDataManager::InsertData(const unsigned int _dataName, data::CData * _data)
+    void CDataManager::InsertData(const unsigned int _dataName, data::IData* _data)
     {
-        m_Map.insert(std::make_pair<unsigned int, data::CData*>(_dataID, _data));
+        m_Map.insert(std::make_pair(_dataName, _data));
     }
 
 
-    data::CData* CDataManager::FindData(const unsigned int _dataName)
+    data::IData* CDataManager::FindData(const unsigned int _dataName)
     {
-        data::CData* ret = nullptr;
+        data::IData* ret = nullptr;
         auto item = m_Map.find(_dataName);
         
         if(item != m_Map.end())
         {
-            ret = &(item->second);
+            ret = item->second;
         }
 
         return ret;

@@ -10,7 +10,7 @@
 #ifndef __COMMON_DATASYSTEM_CDATA_H__
 #define __COMMON_DATASYSTEM_CDATA_H__
 
-#include "./IData.h"
+#include "Common/DataSystem/IData.h"
 
 namespace data
 {

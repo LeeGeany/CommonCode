@@ -7,25 +7,41 @@
  * @copyright jinhee.lee
  */
 
-#include "CThread.h"
+#include "Common/Concurrent/Thread/CThread.h"
 
-namespace concurrent {
 namespace thread {
 
     CThread::CThread() noexcept
-    : m_isLoop(false)
     {
 
     }
-    
+
+    CThread::CThread(thread_once_t _type)
+    : m_threadType(thread_type::THREAD_ONCE_T)
+    {
+
+    }
+
+    CThread::CThread(thread_loop_t _type)
+    : m_threadType(thread_type::THREAD_LOOP_T)
+    {
+
+    }
+
     CThread::~CThread() noexcept
     {
 
     }
 
-    void CThread::Start()
+    void CThread::thread_Start()
     {
         m_thread = std::thread(&CThread::Run, this);
+    }
+
+    void CThread::thread_Stop()
+    {
+        std::lock_guard<std::mutex> lock(m_Mutex.getMutex());
+        m_threadType = thread_type::THREAD_STOP_T;
     }
 
     void CThread::Join()
@@ -54,7 +70,6 @@ namespace thread {
             std::cerr << e.what() << '\n';
         }
         
-        
         do
         {
             try
@@ -67,7 +82,7 @@ namespace thread {
             }
             
         }
-        while(m_isLoop);
+        while(m_threadType == thread_type::THREAD_LOOP_T);
 
         try
         {
@@ -78,6 +93,4 @@ namespace thread {
             std::cerr << e.what() << '\n';
         }
     }
-
 } /* thread */
-} /* concurrent */

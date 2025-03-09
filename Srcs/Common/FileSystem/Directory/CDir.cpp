@@ -23,11 +23,12 @@ namespace dir
     bool CDir::CreateDir()
     {
         bool ret = true;
-        
+        return ret;
     }
 
     bool CDir::isDir()
     {
-
+        bool ret = true;
+        return ret;    
     }
 } /* namespace dir */

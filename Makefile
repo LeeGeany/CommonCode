@@ -22,36 +22,56 @@ INCLUDE = -I $(SRC_DIR)
 # 생성하고자 하는 실행 파일 이름
 TARGET = main
 
-#SRCS  = $(wildcard $(SRC_DIR)/Common/Communication/Ethernet/TCP/*.cpp)
+# Main
+SRCS += $(wildcard $(SRC_DIR)/*.cpp)
 
-#SRCS += $(wildcard $(SRC_DIR)/Common/Communication/Signal/*.cpp)
+# Application
+SRCS += $(wildcard $(SRC_DIR)/App/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/App/Manager/Data/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/App/Manager/Thread/*.cpp)
 
-#SRCS += $(wildcard $(SRC_DIR)/Common/Communication/IPC/MsgQueue/*.cpp)
 
-#SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/Process/*.cpp)
-#SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/Thread/*.cpp)
+# Common
+SRCS += $(wildcard $(SRC_DIR)/Common/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/Common/Communication/Ethernet/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/Common/Communication/Ethernet/TCP/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/Common/Communication/IPC/MsgQueue/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/Common/Communication/Signal/*.cpp)
 
-#SRCS += $(wildcard $(SRC_DIR)/Common/FileSystem/File/*.cpp)
-#SRCS += $(wildcard $(SRC_DIR)/Common/FileSystem/Directory/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/Mutex/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/Thread/*.cpp)
+
+SRCS += $(wildcard $(SRC_DIR)/Common/DataSystem/*.cpp)
+
+SRCS += $(wildcard $(SRC_DIR)/Common/FileSystem/File/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/Common/FileSystem/Directory/*.cpp)
+
+SRCS += $(wildcard $(SRC_DIR)/Common/Time/*.cpp)
+
+# Source
+
+
+
 
 #SRCS += $(wildcard $(SRC_DIR)/Common/Logger/*.cpp)
 
 #SRCS += $(wildcard $(SRC_DIR)/Common/Time/*.cpp)
 
-SRCS += $(wildcard $(SRC_DIR)/App/Manager/Data/*.cpp)
+
 
 #SRCS += $(wildcard $(SRC_DIR)/Source/Interface/Manager/*.cpp)
 #SRCS += $(wildcard $(SRC_DIR)/Source/Interface/Node/*.cpp)
-SRCS += $(wildcard $(SRC_DIR)/Source/Data/*.cpp)
+#SRCS += $(wildcard $(SRC_DIR)/Source/Data/*.cpp)
 
-SRCS += $(wildcard $(SRC_DIR)/UnitTest/*.cpp)
-SRCS += $(wildcard $(SRC_DIR)/UnitTest/*.cpp)
+#SRCS += $(wildcard $(SRC_DIR)/UnitTest/*.cpp)
+#SRCS += $(wildcard $(SRC_DIR)/UnitTest/*.cpp)
 #SRCS += $(wildcard $(SRC_DIR)/UnitTest/Test_MsgQueue/*.cpp)
 #SRCS += $(wildcard $(SRC_DIR)/UnitTest/Test_Thread/*.cpp)
 #SRCS += $(wildcard $(SRC_DIR)/UnitTest/Test_Signal/*.cpp)
 #SRCS += $(wildcard $(SRC_DIR)/UnitTest/Test_TCP/*.cpp)
 
-SRCS += $(wildcard $(SRC_DIR)/*.cpp)
+
 
 OBJS = ${SRCS:.cpp=.o}
 DEPS = $(OBJS:.o=.d)

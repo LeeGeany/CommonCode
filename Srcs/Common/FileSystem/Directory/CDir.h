@@ -19,7 +19,5 @@ namespace dir
 
     private:
         std::string m_FilePath;
-    }
-
-
+    }; /* class CDir */
 } /* namespace dir */

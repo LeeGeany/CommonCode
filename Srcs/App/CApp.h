@@ -10,7 +10,7 @@
 #ifndef __APP_CAPP_H__
 #define __APP_CAPP_H__
 
-#include "../Common/Common.h"
+#include "Common/Common.h"
 #include "App/Manager/Data/CDataManager.h"
 #include "App/Manager/Thread/CThreadManager.h"
 
@@ -30,7 +30,7 @@ namespace app
         /**
          * @brief
          */
-        mngr::CDataManager * m_DataMngr;
+        mngr::CDataManager* m_upDataMngr;
 
         /**
          * @brief

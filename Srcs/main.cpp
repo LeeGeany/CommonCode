@@ -5,16 +5,9 @@ int CommonProjectBuildDate[4]	__attribute__((section("BUildDate"))) = {2024,5,15
 #endif
 
 #include <CommonHeader.h>
-#include "UnitTest/Test_Thread/Test_Thread.h"
 
 int main(void)
 {
-    unittest::CTest_Thread test_Thread;
-
-    
-    test_Thread.Start();
-
-    test_Thread.Join();
-
+    std::cout << "main\n";
     return 0;
 }
