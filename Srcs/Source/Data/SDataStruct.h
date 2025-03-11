@@ -21,6 +21,11 @@ namespace msg
         unsigned short _command       :   16;
         unsigned short _reserved      :   16;
     };
+
+    enum class MsgNo : const unsigned int
+    {
+        IPC_HEADER,
+    };
 }
 
 

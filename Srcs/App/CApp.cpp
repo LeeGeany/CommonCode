@@ -8,7 +8,7 @@ namespace app
     }
 
     CApp::CApp(mngr::CDataManager * _DataMngr)
-    : m_pDataMngr{_DataMngr}
+    : m_upDataMngr{_DataMngr}
     {
 
     }
@@ -18,8 +18,18 @@ namespace app
 
     }
 
+    void CApp::CreateDataMngr()
+    {
+        m_upDataMngr = std::make_unique<mngr::CDataManager>();
+    }
+
+    void CApp::setDataMngr(mngr::CDataManager* _pDataMngr)
+    {
+        m_upDataMngr.reset(_pDataMngr);
+    }
+
     mngr::CDataManager& CApp::getDataMngr()
     {
-        return *m_pDataMngr;
+        return *m_upDataMngr.get();
     }
 } /* namespace app */

@@ -24,10 +24,11 @@ namespace app
         virtual ~CApp();
 
     public:
-        virtual void App_Initiate()=0;
-
+        virtual void Initiate()=0;
 
     public:
+        void CreateDataMngr();
+        void setDataMngr(mngr::CDataManager* _pDataMngr);
         mngr::CDataManager& getDataMngr();
 
 
@@ -35,7 +36,7 @@ namespace app
         /**
          * @brief
          */
-        mngr::CDataManager* m_pDataMngr;
+        std::unique_ptr<mngr::CDataManager> m_upDataMngr;
 
         /**
          * @brief
