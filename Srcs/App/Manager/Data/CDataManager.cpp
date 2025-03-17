@@ -11,7 +11,6 @@
 
 namespace app {
 namespace mngr {
-    //CDataManager * CDataManager::m_pDataIns = nullptr;
 
     CDataManager::CDataManager()
     {
@@ -24,18 +23,15 @@ namespace mngr {
 
     }
 
-
     void CDataManager::Initiate()
     {
         m_Map.clear();
     }
 
-
     void CDataManager::InsertData(const unsigned int _dataName, data::IData* _data)
     {
         m_Map.insert(std::make_pair(_dataName, _data));
     }
-
 
     data::IData* CDataManager::FindData(const unsigned int _dataName)
     {

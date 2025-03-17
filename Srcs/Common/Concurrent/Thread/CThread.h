@@ -17,10 +17,10 @@
 
 namespace thread 
 {
-    struct thread_loop_t    {   explicit thread_loop_t() = default;     };
-    struct thread_once_t    {   explicit thread_once_t() = default;     };
-    struct thread_count_t   {   explicit thread_count_t() = default;    };
-    struct thread_time_t    {   explicit thread_time_t() = default;     };
+    struct thread_loop_t    {   explicit thread_loop_t()    = default;      };
+    struct thread_once_t    {   explicit thread_once_t()    = default;      };
+    struct thread_count_t   {   explicit thread_count_t()   = default;      };
+    struct thread_time_t    {   explicit thread_time_t()    = default;      };
 
     constexpr thread_loop_t   thread_loop;
     constexpr thread_once_t   thread_once;
@@ -36,6 +36,22 @@ namespace thread
         THREAD_STOP_T,
     };
 
+    enum class thread_status
+    {
+        THREAD_STATUS_NEW,
+        THREAD_STATUS_READY,
+        THREAD_STATUS_WAIT,
+        THREAD_STATUS_RUNNING,
+        THREAD_STATUS_TERMINATE
+    };
+
+    typedef struct process_control_block_t
+    {
+        thread::thread_type         _TYPE;
+        thread::thread_status       _STATUS;
+        unsigned int                _LOOP_CNT;
+    }pcb_t;
+
     class CThread : public concurrent::IOperate
     {
     public:
@@ -50,10 +66,7 @@ namespace thread
          * @brief Destroy the CThread object
          */
         virtual ~CThread() noexcept;
-
-    public:
     
-
     public:
         /**
          * @brief 

@@ -27,7 +27,9 @@ SRCS += $(wildcard $(SRC_DIR)/*.cpp)
 
 # Application
 SRCS += $(wildcard $(SRC_DIR)/App/*.cpp)
+
 SRCS += $(wildcard $(SRC_DIR)/App/API/*cpp)
+
 SRCS += $(wildcard $(SRC_DIR)/App/Manager/Data/*.cpp)
 SRCS += $(wildcard $(SRC_DIR)/App/Manager/Thread/*.cpp)
 

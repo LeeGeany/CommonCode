@@ -15,16 +15,26 @@
 #include "Common/DataSystem/IData.h"
 
 namespace app {
-namespace mngr
-{
+namespace mngr {
+    
     class CDataManager
     {
     public:
+        /**
+         * @brief   CDataManager Constructor
+         */
         CDataManager();
+        
+        /**
+         * @brief   CDataManager Destructor
+         */
         virtual ~CDataManager();
 
-
     public:
+        /**
+         * @brief   Function that return this Instance (Singleton)
+         * @return  this
+         */
         static CDataManager* getInstance()
         {
              if(nullptr == m_pDataIns)
@@ -34,13 +44,11 @@ namespace mngr
              return m_pDataIns;
         }
 
-
     public:
         /**
          * @brief   Initiate Manager
          */
         virtual void Initiate();
-
 
     public:
         /**

@@ -16,7 +16,14 @@ namespace app
 
     void CApp::Initiate()
     {
-        m_upDataMngr = std::make_unique<mngr::CDataManager>();
+        // Create Manager if nullptr
+        if(m_upDataMngr.get() == nullptr)
+        {
+            m_upDataMngr = std::make_unique<mngr::CDataManager>();
+        }
+
+        // Initiate Manager
+        m_upDataMngr->Initiate();        
     }
 
     void CApp::CreateDataMngr()
