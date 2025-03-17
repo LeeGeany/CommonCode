@@ -58,15 +58,23 @@ namespace mngr
         bool CreateData(const unsigned int _dataName)
         {
             bool ret = true;
-            std::unique_ptr<T> tData = std::make_unique<T>();
+            auto item = m_Map.find(_dataName);
             
-            if(std::is_base_of_v<data::IData, T> == true)
-            {
-                m_Map.insert(std::make_pair(_dataName, tData));
-            }
-            else
+            if(item != m_Map.end())
             {
                 ret = false;
+            }
+            else
+            {           
+                std::unique_ptr<T> tData = std::make_unique<T>();
+                if(std::is_base_of_v<data::IData, T> == true)
+                {
+                    m_Map[_dataName] = tData.release();
+                }
+                else
+                {
+                    ret = false;
+                }
             }
             return ret;
         }

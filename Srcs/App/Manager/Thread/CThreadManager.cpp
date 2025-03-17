@@ -19,12 +19,11 @@ namespace mngr
 
     void CThreadManager::CreateThread()
     {
-
     }
 
     void CThreadManager::InsertThread()
     {
-        
+
     }
 
 } /* namespace mngr */

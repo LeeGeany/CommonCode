@@ -6,7 +6,7 @@
  * 
  * @copyright jinhee.lee
  */
-
+ 
 #ifndef __APP_MANAGER_THREAD_CTHREADMANAGER_H__
 #define __APP_MANAGER_THREAD_CTHREADMANAGER_H__
 
@@ -36,7 +36,7 @@ namespace mngr
          * @brief
          */
         
-
+    
     }; /* class CThreadManager */
 } /* namespace mngr */
 #endif  /* __APP_MANAGER_THREAD_CTHREADMANAGER_H__ */

@@ -2,20 +2,21 @@
 
 namespace app
 {
+    CApp* CApp::m_pApp = nullptr;
+    
     CApp::CApp()
-    {
-
-    }
-
-    CApp::CApp(mngr::CDataManager * _DataMngr)
-    : m_upDataMngr{_DataMngr}
     {
 
     }
 
     CApp::~CApp()
     {
+        
+    }
 
+    void CApp::Initiate()
+    {
+        m_upDataMngr = std::make_unique<mngr::CDataManager>();
     }
 
     void CApp::CreateDataMngr()

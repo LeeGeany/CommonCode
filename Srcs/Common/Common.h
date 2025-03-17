@@ -16,7 +16,7 @@
 // Memory
 #include <memory>
 
-//
+// For make_pair
 #include <utility>
 
 // Standard Template Library (Container)
