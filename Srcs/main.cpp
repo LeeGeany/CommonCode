@@ -25,7 +25,16 @@ int main(void)
     
     // Final Step | Create Thread
     checker = API::THREAD::CreateThread<usr::CConsoleThread>(CONSOLE_THREAD_NAME);
+
+    cpu_set_t tMask;
+    CPU_SET(2,&tMask);
+
+    checker = API::THREAD::setThreadCoreMask(CONSOLE_THREAD_NAME, tMask);
+
+
     checker = API::THREAD::StartThread(CONSOLE_THREAD_NAME);
+
+
 
 
     checker = API::THREAD::JoinThread(CONSOLE_THREAD_NAME);

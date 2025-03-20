@@ -2,7 +2,7 @@
 CC = g++
 
 # C++ 컴파일러 옵션
-CXXFLAGS = -g -std=c++17
+CXXFLAGS = -g -std=c++17 -pthread
 
 # 링커 옵션
 LDFLAGS = 
@@ -44,6 +44,7 @@ SRCS += $(wildcard $(SRC_DIR)/Common/Communication/Signal/*.cpp)
 SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/*.cpp)
 SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/Mutex/*.cpp)
 SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/Thread/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/Common/Concurrent/Affinity/*.cpp)
 
 SRCS += $(wildcard $(SRC_DIR)/Common/DataSystem/*.cpp)
 

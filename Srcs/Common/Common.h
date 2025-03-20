@@ -24,11 +24,15 @@
 #include <vector>
 #include <string>
 
+//
+#include <cstring>
+
 // Mutex
 #include <mutex>
 
 // Thread
 #include <thread>
+#include <pthread.h>
 
 // Type Traits
 #include <type_traits>

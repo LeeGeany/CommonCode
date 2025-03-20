@@ -74,6 +74,11 @@ namespace thread {
         m_thread.detach();
     }
 
+    std::thread& CThread::getThread()
+    {
+        return m_thread;
+    }
+
     pcb_t & CThread::getThreadInfo()
     {
         std::lock_guard<std::mutex> lock(m_Mutex.getMutex());

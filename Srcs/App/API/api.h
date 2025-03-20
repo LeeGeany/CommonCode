@@ -3,6 +3,7 @@
 
 #include "App/CApp.h"
 
+
 namespace API
 {
     namespace APP
@@ -131,6 +132,21 @@ namespace API
          * @return thread::pcb_t& 
          */
         thread::pcb_t & getThreadInfo(std::string _threadName);
+    
+    
+        /**
+         * @brief Set the Thread Core Mask object
+         * 
+         * @param _threadName 
+         * @param _mask 
+         */
+        bool setThreadCoreMask(std::string _threadName, cpu_set_t _mask);
     } /* namespace THREAD */
-} /* namespace api */
+
+
+    namespace UTIL
+    {
+        
+    } /* namespace UTIL */
+} /* namespace API */
 #endif /* __APP_API_API_H__ */

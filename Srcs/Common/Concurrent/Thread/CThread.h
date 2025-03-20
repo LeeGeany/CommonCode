@@ -90,11 +90,18 @@ namespace thread
         void Detach();
 
         /**
-         * @brief 
-         * @return  pcb_t       return thread infomation
+         * @brief Get the Thread Info object
+         * 
+         * @return pcb_t& 
          */
         pcb_t & getThreadInfo();
 
+        /**
+         * @brief Get the Thread object
+         * 
+         * @return std::thread& 
+         */
+        std::thread& getThread();
 
     private:
         void Run();

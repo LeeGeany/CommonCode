@@ -22,6 +22,8 @@ namespace usr
     private:
         std::string m_Cmd;
 
+        volatile unsigned int counter;
+
     }; /* class CConsoleThread */
 } /* namespace usr */
 

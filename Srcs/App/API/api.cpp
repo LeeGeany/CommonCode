@@ -1,5 +1,7 @@
 #include "App/API/api.h"
 
+#include "Common/Concurrent/Affinity/CSetThreadCoreMask.h"
+
 namespace API
 {
     namespace APP
@@ -20,6 +22,8 @@ namespace API
         }
 
     } /* namespace app */
+
+
 
     namespace DATA
     {
@@ -45,6 +49,8 @@ namespace API
             return tptr;
         }
     } /* namespace DATA */
+
+
 
     namespace THREAD
     {
@@ -97,6 +103,22 @@ namespace API
         thread::pcb_t & getThreadInfo(std::string _threadName)
         {
             return app::CApp::getInstance()->getThreadMngr().getThreadInfo(_threadName);
+        }
+
+        bool setThreadCoreMask(std::string _threadName, cpu_set_t _mask)
+        {
+            bool ret = true;
+            thread::CThread * tptr = app::CApp::getInstance()->getThreadMngr().FindThread(_threadName);
+
+            if(tptr == nullptr)
+            {
+                ret = false;
+            }
+            else
+            {
+                affinity::CSetThreadCoreMask(tptr, _mask);
+            }
+            return ret;
         }
     } /* namespace THREAD */
 } /* namespace API */

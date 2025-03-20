@@ -4,6 +4,7 @@ namespace usr
 {
     CConsoleThread::CConsoleThread(std::string _threadName)
     : thread::CThread(_threadName, thread::thread_loop)
+    , counter{0}
     {
 
     }
@@ -26,6 +27,14 @@ namespace usr
         if(m_Cmd == "exit")
         {
             thread_Stop();
+        }
+        else if(m_Cmd == "loop")
+        {
+            while(1)
+            {
+                counter++;
+                //usleep(1);
+            }
         }
         else
         {
