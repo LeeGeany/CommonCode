@@ -12,14 +12,13 @@
 
 namespace concurrent 
 {
-
     class IOperate
     {
     public:
         /**
          * @brief Destroy the IOperate object
          */
-        virtual ~IOperate(){};
+       // virtual ~IOperate(){};
 
 
     protected:

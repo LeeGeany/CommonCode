@@ -4,20 +4,32 @@ int CommonProjectVersion[4] 	__attribute__((section("BuildVersion"))) = {0,0,0,1
 int CommonProjectBuildDate[4]	__attribute__((section("BUildDate"))) = {2024,5,15,1};
 #endif
 
-#include <CommonHeader.h>
 
 #include "App/API/api.h"
 
 #include "Source/Data/CMsg_IPCHeader.h"
 
+#include "Source/myThread/CConsoleThread.h"
+
+#define CONSOLE_THREAD_NAME "consoleThread"
+
 int main(void)
 {
+    bool checker= true;
+
     // Initiate Top Application 
     API::APP::AppInit();
-    bool check1 = API::DATA::CreateData<msg::CMsg_IPCHeader>(0x1000);
-    if(!check1){std::cout << "fail1\n";}
-    bool check2 = API::DATA::CreateData<msg::CMsg_IPCHeader>(0x1000);
-    if(!check2){std::cout << "fail2\n";}
+
+    // Create Data
+    checker = API::DATA::CreateData<msg::CMsg_IPCHeader>(0x1000);
     
+
+    // Final Step | Create Thread
+    checker = API::THREAD::CreateThread<usr::CConsoleThread>(CONSOLE_THREAD_NAME);
+    checker = API::THREAD::StartThread(CONSOLE_THREAD_NAME);
+
+
+    checker = API::THREAD::JoinThread(CONSOLE_THREAD_NAME);
+
     return 0;
 }

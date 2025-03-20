@@ -63,5 +63,66 @@ namespace mngr {
         }
         return ret;
     }
+
+    bool CThreadManager::StartThread(std::string _threadName)
+    {
+        bool ret = true;
+        auto item = m_ThreadMap.find(_threadName);
+        if(item != m_ThreadMap.end())
+        {
+            item->second->thread_Start();
+        }
+        else
+        {
+            ret = false;
+        }
+        return ret;
+    }
+
+    bool CThreadManager::StopThread(std::string _threadName)
+    {
+        bool ret = true;
+        auto item = m_ThreadMap.find(_threadName);
+        if(item != m_ThreadMap.end())
+        {
+            item->second->thread_Stop();
+        }
+        else
+        {
+            ret = false;
+        }
+        return ret;
+    }
+
+    bool CThreadManager::JoinThread(std::string _threadName)
+    {
+        bool ret = true;
+        auto item = m_ThreadMap.find(_threadName);
+        if(item != m_ThreadMap.end())
+        {
+            item->second->Join();
+        }
+        else
+        {
+            ret = false;
+        }
+        return ret;
+    }
+
+    bool CThreadManager::DetachThread(std::string _threadName)
+    {
+        bool ret = true;
+        auto item = m_ThreadMap.find(_threadName);
+        if(item != m_ThreadMap.end())
+        {
+            item->second->Detach();
+        }
+        else
+        {
+            ret = false;
+        }
+        return ret;
+    }
+
 } /* namespace mngr */
 } /* namespace app */

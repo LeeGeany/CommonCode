@@ -10,7 +10,8 @@
 #ifndef __COMMON_CONCURRENT_THREAD_CTHREAD_H__
 #define __COMMON_CONCURRENT_THREAD_CTHREAD_H__
 
-#include "CommonHeader.h"
+//#include "CommonHeader.h"
+#include "Common/Common.h"
 
 #include <Common/Concurrent/IOperate.h>
 #include <Common/Concurrent/Mutex/CMutex.h>
@@ -38,7 +39,6 @@ namespace thread
 
     enum class thread_status
     {
-        THREAD_STATUS_NEW,
         THREAD_STATUS_READY,
         THREAD_STATUS_WAIT,
         THREAD_STATUS_RUNNING,
@@ -47,9 +47,10 @@ namespace thread
 
     typedef struct process_control_block_t
     {
+        std::string                 _NAME;
         thread::thread_type         _TYPE;
         thread::thread_status       _STATUS;
-        unsigned int                _LOOP_CNT;
+        unsigned int                _RUN_TIME;
     }pcb_t;
 
     class CThread : public concurrent::IOperate
@@ -58,26 +59,26 @@ namespace thread
         /**
          * @brief Construct a new CThread object
          */
-        explicit CThread() noexcept;
-        explicit CThread(thread_once_t _type);
-        explicit CThread(thread_loop_t _type);
+        CThread(std::string _threadName);
+        CThread(std::string _threadName, thread_once_t _type);
+        CThread(std::string _threadName, thread_loop_t _type);
 
         /**
          * @brief Destroy the CThread object
          */
         virtual ~CThread() noexcept;
+
     
     public:
         /**
-         * @brief 
+         * @brief   Function that run Thread
          */
         void thread_Start();
 
         /**
-         * @brief 
+         * @brief   Function that stop Thread (use in loop thread) 
          */
         void thread_Stop();
-
 
         /**
          * @brief 
@@ -86,7 +87,7 @@ namespace thread
 
         /**
          * @brief   Checking this thread can Join
-         * @return  If thread can Join return true, However cannot to join return false
+         * @return  bool    If thread can Join return true, However cannot to join return false
          */
         bool Joinable();
 
@@ -94,6 +95,12 @@ namespace thread
          * @brief 
          */
         void Detach();
+
+        /**
+         * @brief 
+         * @return  pcb_t       return thread infomation
+         */
+        pcb_t & getThreadInfo();
 
 
     private:
@@ -107,14 +114,14 @@ namespace thread
         std::thread m_thread;
 
         /**
-         * @brief   Thread Type
-         */
-        thread_type m_threadType;
-
-        /**
          * @brief   lock for changing m_threadType
          */
         mutex::CMutex m_Mutex;
+
+        /**
+         * @brief   pcb_t
+         */
+        pcb_t           m_PCB;
 
     }; /* class CThread*/
 } /* thread */

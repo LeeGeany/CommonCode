@@ -52,7 +52,72 @@ namespace API
 
     namespace THREAD
     {
+        /**
+         * @brief   Function that Create Thread
+         * @type    DataType        Data Class type 
+         * @param   _dataNo         Key of Data
+         * @return  bool            success - true / fail - false
+         */
+        template <typename ThreadType>
+        bool CreateThread(std::string _threadName)
+        {
+            bool ret = app::CApp::getInstance()->getThreadMngr().CreateThread<ThreadType>(_threadName);
+            return ret;
+        }
 
+        /**
+         * @brief Function that Insert Thread
+         * 
+         * @param _threadName 
+         * @param _thread 
+         * @return true 
+         * @return false 
+         */
+        bool InsertThread(std::string _threadName, thread::CThread * _thread);
+
+        /**
+         * @brief Function that Find Thread Instance
+         * 
+         * @param _threadName 
+         * @return thread::CThread*
+         * @return nullptr 
+         */
+        thread::CThread * FindThread(std::string _threadName);
+        
+        /**
+         * @brief 
+         * @param   _threadName     Key of Map
+         * @return  true     Success 
+         * @return  false    Fail
+         */
+        bool StartThread(std::string _threadName);
+
+        /**
+         * @brief Function that Stop Thread
+         * 
+         * @param _threadName 
+         * @return true     Success 
+         * @return false    Fail
+         */
+        bool StopThread(std::string _threadName);
+
+        /**
+         * @brief 
+         * 
+         * @param _threadName 
+         * @return true     Success 
+         * @return false    Fail
+         */
+        bool JoinThread(std::string _threadName);
+
+        /**
+         * @brief Function that Detach Thread
+         * 
+         * @param _threadName 
+         * @return true 
+         * @return false 
+         */
+        bool DetachThread(std::string _threadName);
     } /* namespace THREAD */
 } /* namespace api */
 #endif /* __APP_API_API_H__ */

@@ -28,49 +28,32 @@ namespace mngr {
         void Initiate();
 
         /**
-         * @brief
+         * @brief Function that Create Thread
+         * @param   _threadName     Thread Name
+         * @param   _type           Thread Type     
+         * @return  bool            success - true / fail - false
          */
         template <typename T>
-        bool CreateThread(std::string _threadName, thread::thread_type _type)
+        bool CreateThread(std::string _threadName)
         {
             bool ret = true;
             auto item = m_ThreadMap.find(_threadName);
         
             if(item != m_ThreadMap.end())
             {
-                
+                ret = false;
             }
             else
             {
-                std::unique_ptr<T> tThread = std::make_unique<T>();
                 if(std::is_base_of_v<thread::CThread, T> == true)
                 {
-                    if(_type == thread::thread_type::THREAD_ONCE_T)
-                    {
-                        tThread = std::make_unique<thread::CThread>(thread::thread_once);
-                    }
-                    else if(_type == thread::thread_type::THREAD_LOOP_T)
-                    {
-                        tThread = std::make_unique<thread::CThread>(thread::thread_loop);
-                    }
-                    else if(_type == thread::thread_type::THREAD_COUNT_T)
-                    {
-                        // Count
-                    }
-                    else if(_type == thread::thread_type::THREAD_TIME_T)
-                    {
-                        // Timer
-                    }
-                    else
-                    {
-                        ret = false;
-                    }
-                }
+                    std::unique_ptr<T> tThread = std::make_unique<T>(_threadName);
 
-
-                if(true == ret)
-                {
                     m_ThreadMap[_threadName] = tThread.release();
+                }
+                else
+                {
+                    ret = false;
                 }
             }
 
@@ -98,6 +81,38 @@ namespace mngr {
          * @return  bool                    success - true / fail - false
          */
         bool DeleteThread(std::string _threadName);
+
+        /**
+         * @brief Function that Start thread
+         * @param   _threadName             Key of Thread Map
+         * @return  bool                    success - true / fail - false
+         */
+        bool StartThread(std::string _threadName);
+
+        /**
+         * @brief Function that Stop thread
+         * @param   _threadName             Key of Thread Map
+         * @return  bool                    success - true / fail - false
+         */
+        bool StopThread(std::string _threadName);
+
+        /**
+         * @brief Function that Join Thread
+         * 
+         * @param _threadName 
+         * @return true 
+         * @return false 
+         */
+        bool JoinThread(std::string _threadName);
+
+        /**
+         * @brief Function that Detach Thread
+         * 
+         * @param _threadName 
+         * @return true 
+         * @return false 
+         */
+        bool DetachThread(std::string _threadName);
 
     private:
         std::unordered_map<std::string, thread::CThread*> m_ThreadMap;

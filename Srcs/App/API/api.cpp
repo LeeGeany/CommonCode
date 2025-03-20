@@ -40,8 +40,52 @@ namespace API
         }
     } /* namespace data */
 
-    namespace thread
+    namespace THREAD
     {
+        bool InsertThread(std::string _threadName, thread::CThread * _pthread)
+        {
+            bool ret = true;
+            thread::CThread * tptr = app::CApp::getInstance()->getThreadMngr().FindThread(_threadName);
 
+            if(tptr == nullptr)
+            {
+                ret = false;
+            }
+            else
+            {
+                app::CApp::getInstance()->getThreadMngr().InsertThread(_threadName, _pthread);
+            }
+            return ret;
+        }
+
+        thread::CThread * FindThread(std::string _threadName)
+        {
+            thread::CThread * tptr = app::CApp::getInstance()->getThreadMngr().FindThread(_threadName);
+            return tptr;
+        }
+
+        bool StartThread(std::string _threadName)
+        {
+            bool ret = app::CApp::getInstance()->getThreadMngr().StartThread(_threadName);
+            return ret;
+        }
+
+        bool StopThread(std::string _threadName)
+        {
+            bool ret = app::CApp::getInstance()->getThreadMngr().StopThread(_threadName);
+            return ret;
+        }
+
+        bool JoinThread(std::string _threadName)
+        {
+            bool ret = app::CApp::getInstance()->getThreadMngr().JoinThread(_threadName);
+            return ret;
+        }
+
+        bool DetachThread(std::string _threadName)
+        {
+            bool ret = app::CApp::getInstance()->getThreadMngr().DetachThread(_threadName);
+            return ret;
+        }
     } /* namespace thread */
 } /* namespace api */

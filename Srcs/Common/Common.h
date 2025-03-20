@@ -27,6 +27,16 @@
 // Mutex
 #include <mutex>
 
+// Thread
+#include <thread>
+
+// Type Traits
+#include <type_traits>
+#include <typeinfo>
+
+// linux
+#include <unistd.h>
+
 namespace common
 {
 

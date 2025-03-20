@@ -54,7 +54,7 @@ SRCS += $(wildcard $(SRC_DIR)/Common/Time/*.cpp)
 
 # Source
 SRCS += $(wildcard $(SRC_DIR)/Source/Data/*.cpp)
-
+SRCS += $(wildcard $(SRC_DIR)/Source/myThread/*.cpp)
 
 
 #SRCS += $(wildcard $(SRC_DIR)/Common/Logger/*.cpp)
