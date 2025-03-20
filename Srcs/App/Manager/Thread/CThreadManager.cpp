@@ -124,5 +124,11 @@ namespace mngr {
         return ret;
     }
 
+    thread::pcb_t & CThreadManager::getThreadInfo(std::string _threadName)
+    {
+        auto item = m_ThreadMap.find(_threadName);
+        return item->second->getThreadInfo();
+    }   
+
 } /* namespace mngr */
 } /* namespace app */

@@ -16,6 +16,11 @@ namespace API
         * @brief   Function that Initiate Data Manager;
         */
         void CreateDataMngr();
+
+        /**
+         * @brief Create a Thread Mngr object
+         */
+        void CreateThreadMngr();
     } /* namespace APP */
 
 
@@ -83,7 +88,7 @@ namespace API
          * @return nullptr 
          */
         thread::CThread * FindThread(std::string _threadName);
-        
+
         /**
          * @brief 
          * @param   _threadName     Key of Map
@@ -118,6 +123,14 @@ namespace API
          * @return false 
          */
         bool DetachThread(std::string _threadName);
+
+        /**
+         * @brief Get the Thread Inof object
+         * 
+         * @param _threadName 
+         * @return thread::pcb_t& 
+         */
+        thread::pcb_t & getThreadInfo(std::string _threadName);
     } /* namespace THREAD */
 } /* namespace api */
 #endif /* __APP_API_API_H__ */

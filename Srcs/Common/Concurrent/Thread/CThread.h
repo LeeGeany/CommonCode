@@ -39,7 +39,6 @@ namespace thread
 
     enum class thread_status
     {
-        THREAD_STATUS_READY,
         THREAD_STATUS_WAIT,
         THREAD_STATUS_RUNNING,
         THREAD_STATUS_TERMINATE
@@ -84,12 +83,6 @@ namespace thread
          * @brief 
          */
         void Join();
-
-        /**
-         * @brief   Checking this thread can Join
-         * @return  bool    If thread can Join return true, However cannot to join return false
-         */
-        bool Joinable();
 
         /**
          * @brief 

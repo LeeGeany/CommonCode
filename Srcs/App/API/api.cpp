@@ -13,6 +13,12 @@ namespace API
         {
             app::CApp::getInstance()->CreateDataMngr();
         }
+
+        void CreateThreadMngr()
+        {
+            app::CApp::getInstance()->CreateThreadMngr();
+        }
+
     } /* namespace app */
 
     namespace DATA
@@ -38,7 +44,7 @@ namespace API
             data::IData * tptr = app::CApp::getInstance()->getDataMngr().FindData(_dataNo); 
             return tptr;
         }
-    } /* namespace data */
+    } /* namespace DATA */
 
     namespace THREAD
     {
@@ -87,5 +93,10 @@ namespace API
             bool ret = app::CApp::getInstance()->getThreadMngr().DetachThread(_threadName);
             return ret;
         }
-    } /* namespace thread */
-} /* namespace api */
+
+        thread::pcb_t & getThreadInfo(std::string _threadName)
+        {
+            return app::CApp::getInstance()->getThreadMngr().getThreadInfo(_threadName);
+        }
+    } /* namespace THREAD */
+} /* namespace API */

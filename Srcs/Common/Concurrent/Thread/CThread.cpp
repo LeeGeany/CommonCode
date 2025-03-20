@@ -12,7 +12,8 @@
 namespace thread {
 
     CThread::CThread(std::string _threadName)
-    : m_PCB { _threadName,
+    : m_PCB { 
+             _threadName,
               thread::thread_type::THREAD_ONCE_T,
               thread::thread_status::THREAD_STATUS_WAIT,
               0
@@ -22,7 +23,8 @@ namespace thread {
     }
 
     CThread::CThread(std::string _threadName, thread_once_t _type)
-    : m_PCB { _threadName,
+    : m_PCB { 
+              _threadName,
               thread::thread_type::THREAD_ONCE_T,
               thread::thread_status::THREAD_STATUS_WAIT,
               0
@@ -32,7 +34,8 @@ namespace thread {
     }
 
     CThread::CThread(std::string _threadName, thread_loop_t _type)
-    : m_PCB { _threadName,
+    : m_PCB { 
+              _threadName,
               thread::thread_type::THREAD_LOOP_T,
               thread::thread_status::THREAD_STATUS_WAIT,
               0
@@ -48,24 +51,22 @@ namespace thread {
 
     void CThread::thread_Start()
     {
+        std::lock_guard<std::mutex> lock(m_Mutex.getMutex());
         m_thread = std::thread(&CThread::Run, this);
+        m_PCB._STATUS   = thread::thread_status::THREAD_STATUS_RUNNING;
         
     }
 
     void CThread::thread_Stop()
     {
         std::lock_guard<std::mutex> lock(m_Mutex.getMutex());
-        m_PCB._TYPE = thread::thread_type::THREAD_STOP_T;
+        m_PCB._STATUS   = thread::thread_status::THREAD_STATUS_TERMINATE;
+        m_PCB._TYPE     = thread::thread_type::THREAD_STOP_T;
     }
 
     void CThread::Join()
     {
         m_thread.join();
-    }
-
-    bool CThread::Joinable()
-    {
-        return m_thread.joinable();
     }
 
     void CThread::Detach()
@@ -75,6 +76,7 @@ namespace thread {
 
     pcb_t & CThread::getThreadInfo()
     {
+        std::lock_guard<std::mutex> lock(m_Mutex.getMutex());
         return m_PCB;
     }
 

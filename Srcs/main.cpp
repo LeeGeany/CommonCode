@@ -23,7 +23,6 @@ int main(void)
     // Create Data
     checker = API::DATA::CreateData<msg::CMsg_IPCHeader>(0x1000);
     
-
     // Final Step | Create Thread
     checker = API::THREAD::CreateThread<usr::CConsoleThread>(CONSOLE_THREAD_NAME);
     checker = API::THREAD::StartThread(CONSOLE_THREAD_NAME);

@@ -114,6 +114,14 @@ namespace mngr {
          */
         bool DetachThread(std::string _threadName);
 
+        /**
+         * @brief Get the Thread Info object
+         * 
+         * @param _threadName 
+         * @return thread::pcb_t& 
+         */
+        thread::pcb_t & getThreadInfo(std::string _threadName);
+
     private:
         std::unordered_map<std::string, thread::CThread*> m_ThreadMap;
     
