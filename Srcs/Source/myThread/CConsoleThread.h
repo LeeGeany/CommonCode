@@ -12,7 +12,7 @@ namespace usr
         CConsoleThread(std::string _threadName);
         virtual ~CConsoleThread();
 
-    public:
+    private:
         virtual void PreOperate() final;
 
         virtual void Operate() final;
@@ -21,9 +21,6 @@ namespace usr
 
     private:
         std::string m_Cmd;
-
-        volatile unsigned int counter;
-
     }; /* class CConsoleThread */
 } /* namespace usr */
 

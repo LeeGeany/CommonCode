@@ -1,10 +1,12 @@
 #include "Source/myThread/CConsoleThread.h"
 
+#include "App/API/api.h"
+#include "Source/myThread/CStressThread.h"
+
 namespace usr 
 {
     CConsoleThread::CConsoleThread(std::string _threadName)
     : thread::CThread(_threadName, thread::thread_loop)
-    , counter{0}
     {
 
     }
@@ -28,13 +30,45 @@ namespace usr
         {
             thread_Stop();
         }
-        else if(m_Cmd == "loop")
+        else if(m_Cmd == "thread1")
         {
-            while(1)
-            {
-                counter++;
-                //usleep(1);
-            }
+            API::THREAD::CreateThread<CStressThread>("thread1");
+            API::THREAD::StartThread("thread1");
+            API::THREAD::DetachThread("thread1");
+        }
+        else if(m_Cmd == "thread2")
+        {
+            API::THREAD::CreateThread<CStressThread>("thread2");
+            API::THREAD::StartThread("thread2");
+            API::THREAD::DetachThread("thread2");
+        }
+        else if(m_Cmd == "thread3")
+        {
+            API::THREAD::CreateThread<CStressThread>("thread3");
+            API::THREAD::StartThread("thread3");         
+            API::THREAD::DetachThread("thread3");  
+        }
+        else if(m_Cmd == "thread4")
+        {
+            API::THREAD::CreateThread<CStressThread>("thread4");
+            API::THREAD::StartThread("thread4"); 
+            API::THREAD::DetachThread("thread4");           
+        }
+        else if(m_Cmd == "stop1")
+        {
+            API::THREAD::StopThread("thread1");
+        }
+        else if(m_Cmd == "stop2")
+        {
+            API::THREAD::StopThread("thread2");
+        }
+        else if(m_Cmd == "stop3")
+        {
+            API::THREAD::StopThread("thread3");
+        }
+        else if(m_Cmd == "stop4")
+        {
+            API::THREAD::StopThread("thread4");
         }
         else
         {
@@ -44,6 +78,7 @@ namespace usr
 
     void CConsoleThread::PostOperate()
     {
+
         std::cout << "Console Off\n";
     }
 } /* namespace usr */

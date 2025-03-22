@@ -9,13 +9,14 @@ namespace affinity
     class CSetThreadCoreMask
     {
     public:
-        CSetThreadCoreMask(thread::CThread * _thread, cpu_set_t _mask);
+        CSetThreadCoreMask(thread::CThread * _thread, unsigned int _mask);
         virtual ~CSetThreadCoreMask();
 
     public:
-        void operator()(thread::CThread * _thread, cpu_set_t _mask)
+        void operator()(thread::CThread * _thread, unsigned int _mask)
         {
-            pthread_setaffinity_np(_thread->getThread().native_handle(), sizeof(cpu_set_t), &_mask);
+            CPU_SET(_mask, &m_CPUSet);
+            pthread_setaffinity_np(_thread->getThread().native_handle(), sizeof(cpu_set_t), &m_CPUSet);
         }
 
     private:

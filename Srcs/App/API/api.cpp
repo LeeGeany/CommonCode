@@ -105,7 +105,7 @@ namespace API
             return app::CApp::getInstance()->getThreadMngr().getThreadInfo(_threadName);
         }
 
-        bool setThreadCoreMask(std::string _threadName, cpu_set_t _mask)
+        bool setThreadCoreMask(std::string _threadName, unsigned int _coreMask)
         {
             bool ret = true;
             thread::CThread * tptr = app::CApp::getInstance()->getThreadMngr().FindThread(_threadName);
@@ -116,7 +116,7 @@ namespace API
             }
             else
             {
-                affinity::CSetThreadCoreMask(tptr, _mask);
+                affinity::CSetThreadCoreMask(tptr, _coreMask);
             }
             return ret;
         }

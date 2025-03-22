@@ -34,6 +34,8 @@
 #include <thread>
 #include <pthread.h>
 
+#include <sched.h>
+
 // Type Traits
 #include <type_traits>
 #include <typeinfo>

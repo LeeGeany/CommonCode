@@ -2,10 +2,10 @@
 
 namespace affinity
 {
-    CSetThreadCoreMask::CSetThreadCoreMask(thread::CThread * _thread, cpu_set_t _mask)
+    CSetThreadCoreMask::CSetThreadCoreMask(thread::CThread * _thread, unsigned int _mask)
     {
         m_pthread   = _thread->getThread().native_handle();
-        m_CPUSet    = _mask;
+        CPU_ZERO(&m_CPUSet);
        
     }
 

@@ -140,7 +140,7 @@ namespace API
          * @param _threadName 
          * @param _mask 
          */
-        bool setThreadCoreMask(std::string _threadName, cpu_set_t _mask);
+        bool setThreadCoreMask(std::string _threadName, unsigned int _coreMask);
     } /* namespace THREAD */
 
 
