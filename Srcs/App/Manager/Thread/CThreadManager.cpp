@@ -1,134 +1,137 @@
-#include "./CThreadManager.h"
+/**
+ * @file    CThreadManager.h
+ * @author  jinhee.lee
+ * @date    2025.03.17
+ * @brief   Class of Thread Manager
+ * 
+ * @copyright jinhee.lee
+ */
 
-namespace app {
-namespace mngr {
-    CThreadManager::CThreadManager()
+#include "App/Manager/Thread/CThreadManager.h"
+
+CThreadManager::CThreadManager()
+{
+
+}
+
+CThreadManager::~CThreadManager()
+{
+
+}
+
+void CThreadManager::Initiate()
+{
+    m_ThreadMap.clear();
+}
+
+bool CThreadManager::InsertThread(std::string _threadName, thread::CThread* _thread)
+{
+    bool ret = true;
+    auto item = m_ThreadMap.find(_threadName);
+    if(item != m_ThreadMap.end())
     {
-
+        ret = false;
     }
-
-    CThreadManager::~CThreadManager()
+    else
     {
-
+        m_ThreadMap[_threadName] = _thread;
     }
+    return ret;
+}
 
-    void CThreadManager::Initiate()
+thread::CThread* CThreadManager::FindThread(std::string _threadName)
+{
+    thread::CThread * tptr = nullptr;
+
+    auto item = m_ThreadMap.find(_threadName);
+    if(item != m_ThreadMap.end())
     {
-        m_ThreadMap.clear();
+        tptr = item->second;
     }
+    return tptr;
+}
 
-    bool CThreadManager::InsertThread(std::string _threadName, thread::CThread* _thread)
+bool CThreadManager::DeleteThread(std::string _threadName)
+{
+    bool ret = false;
+    for(auto it = m_ThreadMap.begin(); it != m_ThreadMap.end(); )
     {
-        bool ret = true;
-        auto item = m_ThreadMap.find(_threadName);
-        if(item != m_ThreadMap.end())
+        if(it->first == _threadName)
         {
-            ret = false;
+            it = m_ThreadMap.erase(it);
+            ret = true;
+            break;
         }
         else
         {
-            m_ThreadMap[_threadName] = _thread;
+            it++;
         }
-        return ret;
     }
+    return ret;
+}
 
-    thread::CThread* CThreadManager::FindThread(std::string _threadName)
+bool CThreadManager::StartThread(std::string _threadName)
+{
+    bool ret = true;
+    auto item = m_ThreadMap.find(_threadName);
+    if(item != m_ThreadMap.end())
     {
-        thread::CThread * tptr = nullptr;
-
-        auto item = m_ThreadMap.find(_threadName);
-        if(item != m_ThreadMap.end())
-        {
-            tptr = item->second;
-        }
-        
-        return tptr;
+        item->second->thread_Start();
     }
-
-    bool CThreadManager::DeleteThread(std::string _threadName)
+    else
     {
-        bool ret = false;
-        for(auto it = m_ThreadMap.begin(); it != m_ThreadMap.end(); )
-        {
-            if(it->first == _threadName)
-            {
-                it = m_ThreadMap.erase(it);
-                ret = true;
-                break;
-            }
-            else
-            {
-                it++;
-            }
-        }
-        return ret;
+        ret = false;
     }
+    return ret;
+}
 
-    bool CThreadManager::StartThread(std::string _threadName)
+bool CThreadManager::StopThread(std::string _threadName)
+{
+    bool ret = true;
+    auto item = m_ThreadMap.find(_threadName);
+    if(item != m_ThreadMap.end())
     {
-        bool ret = true;
-        auto item = m_ThreadMap.find(_threadName);
-        if(item != m_ThreadMap.end())
-        {
-            item->second->thread_Start();
-        }
-        else
-        {
-            ret = false;
-        }
-        return ret;
+        item->second->thread_Stop();
     }
-
-    bool CThreadManager::StopThread(std::string _threadName)
+    else
     {
-        bool ret = true;
-        auto item = m_ThreadMap.find(_threadName);
-        if(item != m_ThreadMap.end())
-        {
-            item->second->thread_Stop();
-        }
-        else
-        {
-            ret = false;
-        }
-        return ret;
+        ret = false;
     }
+    return ret;
+}
 
-    bool CThreadManager::JoinThread(std::string _threadName)
+bool CThreadManager::JoinThread(std::string _threadName)
+{
+    bool ret = true;
+    auto item = m_ThreadMap.find(_threadName);
+    if(item != m_ThreadMap.end())
     {
-        bool ret = true;
-        auto item = m_ThreadMap.find(_threadName);
-        if(item != m_ThreadMap.end())
-        {
-            item->second->Join();
-        }
-        else
-        {
-            ret = false;
-        }
-        return ret;
+        item->second->Join();
     }
-
-    bool CThreadManager::DetachThread(std::string _threadName)
+    else
     {
-        bool ret = true;
-        auto item = m_ThreadMap.find(_threadName);
-        if(item != m_ThreadMap.end())
-        {
-            item->second->Detach();
-        }
-        else
-        {
-            ret = false;
-        }
-        return ret;
+        ret = false;
     }
+    return ret;
+}
 
-    thread::pcb_t & CThreadManager::getThreadInfo(std::string _threadName)
+bool CThreadManager::DetachThread(std::string _threadName)
+{
+    bool ret = true;
+    auto item = m_ThreadMap.find(_threadName);
+    if(item != m_ThreadMap.end())
     {
-        auto item = m_ThreadMap.find(_threadName);
-        return item->second->getThreadInfo();
-    }   
+        item->second->Detach();
+    }
+    else
+    {
+        ret = false;
+    }
+    return ret;
+}
 
-} /* namespace mngr */
-} /* namespace app */
+thread::pcb_t & CThreadManager::getThreadInfo(std::string _threadName)
+{
+    auto item = m_ThreadMap.find(_threadName);
+    return item->second->getThreadInfo();
+}   

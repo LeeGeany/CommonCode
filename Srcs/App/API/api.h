@@ -3,7 +3,6 @@
 
 #include "App/CApp.h"
 
-
 namespace API
 {
     namespace APP
@@ -36,7 +35,7 @@ namespace API
         template <typename DataType>
         bool CreateData(const unsigned int _dataNo)
         {
-            bool ret = app::CApp::getInstance()->getDataMngr().CreateData<DataType>(_dataNo);
+            bool ret = CApp::getInstance()->getDataMngr().CreateData<DataType>(_dataNo);
             return ret;
         }
 
@@ -67,7 +66,7 @@ namespace API
         template <typename ThreadType>
         bool CreateThread(std::string _threadName)
         {
-            bool ret = app::CApp::getInstance()->getThreadMngr().CreateThread<ThreadType>(_threadName);
+            bool ret = CApp::getInstance()->getThreadMngr().CreateThread<ThreadType>(_threadName);
             return ret;
         }
 
@@ -142,6 +141,11 @@ namespace API
          */
         bool setThreadCoreMask(std::string _threadName, unsigned int _coreMask);
     } /* namespace THREAD */
+
+    namespace ETH
+    {
+        
+    } /* namespace ETH */
 
 
     namespace UTIL

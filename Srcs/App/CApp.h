@@ -2,7 +2,7 @@
  * @file    CApp.h
  * @author  jinhee.lee
  * @date    2024.10.21
- * @brief   Class of Application
+ * @brief   Class of Application Header
  * 
  * @copyright jinhee.lee
  */
@@ -14,60 +14,66 @@
 
 #include "App/Manager/Data/CDataManager.h"
 #include "App/Manager/Thread/CThreadManager.h"
+#include "App/Manager/Ethernet/CEthernetManager.h"
 
-namespace app
+class CApp
 {
-    class CApp
+public:
+    CApp();
+    virtual ~CApp();
+
+public:
+    static CApp * getInstance()
     {
-    public:
-        CApp();
-        virtual ~CApp();
-
-    public:
-        static CApp * getInstance()
+        if(m_pApp == nullptr)
         {
-            if(m_pApp == nullptr)
-            {
-                m_pApp = new CApp();
-            }
-            return m_pApp;
+            m_pApp = new CApp();
         }
+        return m_pApp;
+    }
 
-    public:
-        void Initiate();
-
-
-    public:
-        // Create
-        void CreateDataMngr();
-        void CreateThreadMngr();
-
-        // Set
-        void setDataMngr(mngr::CDataManager* _pDataMngr);
-        void setDataMngr(mngr::CThreadManager* _pThreadMngr);
-        
-        // Get
-        mngr::CDataManager& getDataMngr();
-        mngr::CThreadManager& getThreadMngr();
+public:
+    void Initiate();
 
 
-    private:
-        /**
-         * @brief   This class Instance (Singleton)
-         */
-        static CApp* m_pApp;
+public:
+    // Create
+    void CreateDataMngr();
+    void CreateThreadMngr();
+    void CreateEthernetMngr();
+
+    // Set
+    void setDataMngr(CDataManager* _pDataMngr);
+    void setThreadMngr(CThreadManager* _pThreadMngr);
+    void setEthernetMngr(CEthernetManager* _pEthernetMngr);
+
+    // Get
+    CDataManager& getDataMngr();
+    CThreadManager& getThreadMngr();
+    CEthernetManager& getEthernetMngr();
 
 
-    private:
-        /**
-         * @brief   Data Manager Instance
-         */
-        std::unique_ptr<mngr::CDataManager> m_upDataMngr;
+private:
+    /**
+     * @brief   This class Instance (Singleton)
+     */
+    static CApp* m_pApp;
 
-        /**
-         * @brief   Thread Manager Instance
-         */
-        std::unique_ptr<mngr::CThreadManager> m_upThreadMngr;
-    }; /* class CApp */
-} /* namespace app */
+
+private:
+    /**
+     * @brief   Data Manager Instance
+     */
+    std::unique_ptr<CDataManager> m_upDataMngr;
+
+    /**
+     * @brief   Thread Manager Instance
+     */
+    std::unique_ptr<CThreadManager> m_upThreadMngr;
+
+    /**
+     * @brief   Ethernet Manager Instance
+     */
+    std::unique_ptr<CEthernetManager> m_upEthernetMngr;
+}; /* class CApp */
 #endif  /* __APP_CAPP_H__ */
